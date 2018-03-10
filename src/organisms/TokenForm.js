@@ -3,6 +3,7 @@
  */
 import React, { Component } from 'react'
 import { Form } from 'semantic-ui-react'
+import { dispatch } from '@rematch/core'
 
 /**
  * Define TokenForm component
@@ -73,6 +74,7 @@ class TokenForm extends Component {
 
   _handleSubmit = () => {
     console.log('_handleSubmit')
+    dispatch.web3.set({ key: 'value' })
   }
 }
 

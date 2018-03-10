@@ -5,7 +5,6 @@ import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
 
 import Menu from './organisms/Menu'
-
 import Home from './pages/Home'
 import Token from './pages/Token'
 
@@ -17,7 +16,7 @@ class App extends Component {
   /**
    * Render the component
    */
-  render() {
+  render () {
     return (
       <div>
         <Menu />
