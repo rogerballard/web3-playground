@@ -8,7 +8,7 @@ import { Provider } from 'react-redux'
 import 'semantic-ui-css/semantic.min.css';
 
 import store from './utils/store'
-import registerServiceWorker from './utils/registerServiceWorker';
+import registerServiceWorker from './utils/registerServiceWorker'
 import getWeb3 from './utils/getWeb3'
 import App from './App';
 

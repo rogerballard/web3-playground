@@ -22,7 +22,7 @@ const getWeb3 = new Promise(function(resolve, reject) {
 
       console.log('Injected web3 detected.');
 
-      return resolve(dispatch.web3.set(results.web3))
+      return resolve(dispatch.web3.init(results.web3))
     } else {
       // Fallback to localhost if no web3 injection. We've configured this to
       // use the development console's port by default.
@@ -36,7 +36,7 @@ const getWeb3 = new Promise(function(resolve, reject) {
 
       console.log('No web3 instance injected, using Local web3.');
 
-      return resolve(dispatch.web3.set(results.web3))
+      return resolve(dispatch.web3.init(results.web3))
     }
   })
 })

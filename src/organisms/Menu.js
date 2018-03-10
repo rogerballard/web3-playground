@@ -5,6 +5,8 @@ import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { Container, Menu } from 'semantic-ui-react'
 
+import Web3Instance from '../molecules/Web3Instance'
+
 /**
  * Define Menu component
  * @extends Component
@@ -21,6 +23,9 @@ class AppMenu extends Component {
             <Link to='/'>DAICO Test Page</Link>
           </Menu.Item>
           {this._renderMenuItems()}
+          <Menu.Item position='right'>
+            <Web3Instance />
+          </Menu.Item>
         </Container>
       </Menu>
     )
