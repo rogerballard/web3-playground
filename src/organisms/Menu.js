@@ -5,7 +5,7 @@ import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { Container, Menu } from 'semantic-ui-react'
 
-import Web3Instance from '../molecules/Web3Instance'
+import AccountInfo from '../molecules/AccountInfo'
 
 /**
  * Define Menu component
@@ -20,11 +20,11 @@ class AppMenu extends Component {
       <Menu fixed='top' inverted>
         <Container>
           <Menu.Item header>
-            <Link to='/'>DAICO Test Page</Link>
+            <Link to='/'>Playground</Link>
           </Menu.Item>
           {this._renderMenuItems()}
           <Menu.Item position='right'>
-            <Web3Instance />
+            <AccountInfo />
           </Menu.Item>
         </Container>
       </Menu>
@@ -67,8 +67,8 @@ class AppMenu extends Component {
  */
 const styles = {
   menuItem: {
-    paddingBottom: '1.25em',
-    paddingTop: '1.25em'
+    paddingBottom: '1.5em',
+    paddingTop: '1.5em'
   }
 }
 

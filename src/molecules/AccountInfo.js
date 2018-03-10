@@ -4,13 +4,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-class Web3Instance extends Component {
+import Blocky from '../atoms/Blocky'
+
+class AccountInfo extends Component {
   render () {
     const { account } = this.props
     return (
-      <div>
-        {account}
-      </div>
+      <Blocky seed={account} />
     )
   }
 }
@@ -19,4 +19,4 @@ const mapState = (state) => ({
   account: state.web3.account
 })
 
-export default connect(mapState)(Web3Instance)
+export default connect(mapState)(AccountInfo)
