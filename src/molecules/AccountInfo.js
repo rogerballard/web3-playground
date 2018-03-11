@@ -6,11 +6,20 @@ import { connect } from 'react-redux'
 
 import Blocky from '../atoms/Blocky'
 
+/**
+ * Define AccountInfo component
+ * @extends Component
+ */
 class AccountInfo extends Component {
   render () {
     const { account } = this.props
     return (
-      <Blocky seed={account} />
+      <div>
+        <span>
+          {account}
+        </span>
+        <Blocky seed={account} />
+      </div>
     )
   }
 }
