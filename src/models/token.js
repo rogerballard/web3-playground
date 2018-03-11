@@ -11,7 +11,8 @@ const token = {
   state: {
     compiled: null,
     contract: null,
-    instances: []
+    instances: [],
+    selectedInstance: null
   },
   reducers: {
     setCompiled (state, payload) {
@@ -38,6 +39,12 @@ const token = {
         ]
       }
     },
+    selectInstance (state, payload) {
+      return {
+        ...state,
+        selectedInstance: payload
+      }
+    }
   },
   effects: {
     async deploy (payload, rootState) {

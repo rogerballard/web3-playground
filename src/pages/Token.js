@@ -5,8 +5,9 @@ import React, { Component } from 'react'
 import { Grid, Segment } from 'semantic-ui-react'
 
 import BasePage from '../templates/BasePage'
-import ContractList from '../organisms/ContractList'
 import TokenForm from '../organisms/TokenForm'
+import TokenContract from '../organisms/TokenContract'
+import TokenContractList from '../organisms/TokenContractList'
 
 /**
  * Define Token page
@@ -31,7 +32,7 @@ class Token extends Component {
             </Grid.Column>
             <Grid.Column width={8}>
               <h2>Interact</h2>
-              {this._renderContractForm()}
+              {this._renderContract()}
             </Grid.Column>
           </Grid.Row>
         </Grid>
@@ -52,14 +53,14 @@ class Token extends Component {
 
   _renderDeployedContracts () {
     return (
-      <ContractList />
+      <TokenContractList />
     )
   }
 
-  _renderContractForm () {
+  _renderContract () {
     return (
       <Segment>
-        Contract
+        <TokenContract />
       </Segment>
     )
   }
