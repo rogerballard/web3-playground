@@ -8,7 +8,6 @@ import { dispatch } from '@rematch/core'
  * @type {Object}
  */
 const account = {
-  name: 'account',
   state: {
     address: null,
     balance: null
@@ -44,9 +43,8 @@ const account = {
       /**
        * Fetch balance for address
        */
-      let balanceWei = await web3.eth.getBalance(address)
-      let balanceEth = await web3.utils.fromWei(balanceWei, 'ether')
-      dispatch.account.setBalance(balanceEth)
+      let balance = await web3.eth.getBalance(address)
+      dispatch.account.setBalance(balance)
     }
   }
 }

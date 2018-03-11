@@ -5,6 +5,7 @@ import React, { Component } from 'react'
 import { Grid, Segment } from 'semantic-ui-react'
 
 import BasePage from '../templates/BasePage'
+import ContractList from '../organisms/ContractList'
 import TokenForm from '../organisms/TokenForm'
 
 /**
@@ -51,14 +52,7 @@ class Token extends Component {
 
   _renderDeployedContracts () {
     return (
-      <Segment.Group>
-        <Segment>
-          Deployed Contract #1
-        </Segment>
-        <Segment>
-          Deployed Contract #2
-        </Segment>
-      </Segment.Group>
+      <ContractList />
     )
   }
 

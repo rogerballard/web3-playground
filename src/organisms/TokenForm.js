@@ -2,44 +2,29 @@
  * Import dependencies
  */
 import React, { Component } from 'react'
-import { Form } from 'semantic-ui-react'
+import { connect } from 'react-redux'
 import { dispatch } from '@rematch/core'
+import { Form } from 'semantic-ui-react'
 
 /**
  * Define TokenForm component
  * @extends Component
  */
 class TokenForm extends Component {
-  state = {
-    decimals: '',
-    decimalsValid: true,
-    name: '',
-    nameValid: true,
-    symbol: '',
-    symbolValid: true
-  }
   /**
    * Render component
    */
   render () {
-    const {
-      decimals,
-      name,
-      symbol,
-      decimalsValid,
-      nameValid,
-      symbolValid
-    } = this.state
+    const { name, symbol, decimals, loading } = this.props
 
     return (
-      <Form onSubmit={this._handleSubmit}>
+      <Form onSubmit={this._handleSubmit} loading={loading}>
         <Form.Input
           label='Name'
           placeholder='Ethereum'
           name='name'
           value={name}
           onChange={this._handleChange}
-          error={!nameValid}
         />
         <Form.Input
           label='Symbol'
@@ -48,7 +33,6 @@ class TokenForm extends Component {
           value={symbol}
           onChange={this._handleChange}
           type='text'
-          error={!symbolValid}
         />
         <Form.Input
           label='Decimals'
@@ -57,7 +41,6 @@ class TokenForm extends Component {
           value={decimals}
           onChange={this._handleChange}
           type='number'
-          error={!decimalsValid}
           min='0'
           max='18'
         />
@@ -67,14 +50,29 @@ class TokenForm extends Component {
       </Form>
     )
   }
-
+  /**
+   * Handle form item change
+   */
   _handleChange = (e, { name, value }) => {
-    this.setState({ [name]: value })
+    dispatch.tokenForm.set({ [name]: value })
   }
-
-  _handleSubmit = () => {
-    dispatch.token.deploy()
+  /**
+   * Handle form submit
+   */
+  _handleSubmit = async () => {
+    const { name, symbol, decimals } = this.props
+    dispatch.tokenForm.toggleLoading()
+    await dispatch.token.deploy({ name, symbol, decimals })
+    dispatch.tokenForm.toggleLoading()
+    dispatch.tokenForm.set({ name: '', symbol: '', decimals: 0 })
   }
 }
 
-export default TokenForm
+const mapState = (state) => ({
+  name: state.tokenForm.name,
+  symbol: state.tokenForm.symbol,
+  decimals: state.tokenForm.decimals,
+  loading: state.tokenForm.loading
+})
+
+export default connect(mapState)(TokenForm)
