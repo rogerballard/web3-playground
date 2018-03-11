@@ -12,20 +12,21 @@ import Blocky from '../atoms/Blocky'
  */
 class AccountInfo extends Component {
   render () {
-    const { account } = this.props
+    const { address, balance } = this.props
     return (
       <div>
         <span>
-          {account}
+          {balance}
         </span>
-        <Blocky seed={account} />
+        <Blocky seed={address} />
       </div>
     )
   }
 }
 
 const mapState = (state) => ({
-  account: state.web3.account
+  address: state.account.address,
+  balance: state.account.balance
 })
 
 export default connect(mapState)(AccountInfo)
