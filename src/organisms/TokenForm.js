@@ -64,7 +64,7 @@ class TokenForm extends Component {
     dispatch.tokenForm.toggleLoading()
     await dispatch.token.deploy({ name, symbol, decimals })
     dispatch.tokenForm.toggleLoading()
-    dispatch.tokenForm.set({ name: '', symbol: '', decimals: 0 })
+    dispatch.tokenForm.reset()
   }
 }
 

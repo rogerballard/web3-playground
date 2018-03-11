@@ -16,6 +16,14 @@ const tokenForm = {
         ...payload
       }
     },
+    reset (state, payload) {
+      return {
+        ...state,
+        name: '',
+        symbol: '',
+        decimals: 18
+      }
+    },
     toggleLoading (state, payload) {
       return {
         ...state,
