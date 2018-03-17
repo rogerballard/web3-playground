@@ -1,7 +1,5 @@
-/**
- * Import dependencies
- */
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import Blocky from '../atoms/Blocky'
@@ -22,6 +20,11 @@ class AccountInfo extends Component {
       </div>
     )
   }
+}
+
+AccountInfo.propTypes = {
+  address: PropTypes.string,
+  balance: PropTypes.string
 }
 
 const mapState = (state) => ({

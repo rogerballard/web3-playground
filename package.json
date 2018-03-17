@@ -16,13 +16,17 @@
     "css-loader": "0.26.0",
     "detect-port": "1.0.1",
     "dotenv": "2.0.0",
-    "eslint": "3.8.1",
+    "eslint": "^3.8.1",
     "eslint-config-react-app": "^0.5.0",
+    "eslint-config-standard": "^11.0.0",
     "eslint-loader": "1.6.0",
     "eslint-plugin-flowtype": "2.21.0",
-    "eslint-plugin-import": "2.0.1",
+    "eslint-plugin-import": "^2.9.0",
     "eslint-plugin-jsx-a11y": "2.2.3",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.7.0",
     "eslint-plugin-react": "6.4.1",
+    "eslint-plugin-standard": "^3.0.1",
     "extract-text-webpack-plugin": "1.0.1",
     "file-loader": "0.9.0",
     "filesize": "3.3.0",
@@ -38,6 +42,7 @@
     "promise": "7.1.1",
     "react-dev-utils": "^0.4.2",
     "recursive-readdir": "2.1.0",
+    "standard": "^11.0.1",
     "strip-ansi": "3.0.1",
     "style-loader": "0.13.1",
     "truffle-contract": "^1.1.8",
@@ -53,7 +58,9 @@
     "@rematch/core": "^0.5.2",
     "@rematch/subscriptions": "^0.2.2",
     "dotenv": "^2.0.0",
+    "ethers": "^3.0.6",
     "moment": "^2.21.0",
+    "prop-types": "^15.6.1",
     "react": "^15.4.2",
     "react-blockies": "^1.2.2",
     "react-dom": "^15.4.2",
@@ -67,7 +74,8 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom"
+    "test": "node scripts/test.js --env=jsdom",
+    "lint": "standard src/**"
   },
   "jest": {
     "collectCoverageFrom": [
