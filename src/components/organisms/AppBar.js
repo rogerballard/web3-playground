@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { Container, Dropdown, Icon, Menu } from 'semantic-ui-react'
 
+import Blocky from '../atoms/Blocky'
+
 class AppBar extends Component {
   render () {
     const { address, balance } = this.props
@@ -28,9 +30,9 @@ class AppBar extends Component {
             </a>
           </Menu.Item>
           <Menu.Menu position='right'>
-            <Menu.Item icon='sitemap' />
             <Menu.Item content={balance + ' ETH'} />
             <Menu.Item content={address} />
+            <Menu.Item content={<Blocky data={address} />} />
           </Menu.Menu>
         </Container>
       </Menu>
