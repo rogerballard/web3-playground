@@ -58,7 +58,6 @@
     "@rematch/core": "^0.5.2",
     "@rematch/subscriptions": "^0.2.2",
     "dotenv": "^2.0.0",
-    "ethers": "^3.0.6",
     "moment": "^2.21.0",
     "prop-types": "^15.6.1",
     "react": "^15.4.2",

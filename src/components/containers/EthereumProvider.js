@@ -1,6 +1,6 @@
 import { Component } from 'react'
-import { providers } from 'ethers'
 import { dispatch } from '@rematch/core'
+import Web3 from 'web3'
 
 class EthereumProvider extends Component {
   componentWillMount () {
@@ -19,14 +19,13 @@ class EthereumProvider extends Component {
     }
   }
   async connectToMetamask (web3) {
-    const provider = new providers.Web3Provider(web3.currentProvider)
-    dispatch.provider.init({ provider, type: 'Metamask' })
+    dispatch.provider.init({ provider: web3.currentProvider, type: 'Metamask' })
     console.log('Connected to Ethereum via Metamask')
   }
   async connectToLocalNetwork() {
     const uri = 'http://localhost:7545'
-    const provider = await new providers.JsonRpcProvider(uri)
-    dispatch.provider.init({ provider, type: 'JsonRpc' })
+    const provider = new Web3.providers.HttpProvider(uri)
+    dispatch.provider.init({ provider, type: 'JsonRPC' })
     console.log('Connected to Ethereum via Local Network')
   }
 }
