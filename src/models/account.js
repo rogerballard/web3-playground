@@ -3,7 +3,7 @@ import { dispatch } from '@rematch/core'
 const account = {
   state: {
     address: null,
-    balance: null
+    balance: '0'
   },
   reducers: {
     setAddress (state, payload) {
