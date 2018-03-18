@@ -3,6 +3,7 @@ import { Container, Grid, Segment } from 'semantic-ui-react'
 
 import AppBar from '../containers/AppBar'
 import TokenForm from '../containers/TokenForm'
+import TokenInterface from '../organisms/TokenInterface'
 
 class TokenContract extends Component {
   render () {
@@ -24,9 +25,7 @@ class TokenContract extends Component {
               </Segment>
             </Grid.Column>
             <Grid.Column width={12}>
-              <Segment>
-                Right
-              </Segment>
+              <TokenInterface />
             </Grid.Column>
           </Grid.Row>
         </Grid>
