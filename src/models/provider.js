@@ -1,15 +1,13 @@
 const provider = {
   state: {
     provider: null,
-    network: null,
-    uri: null
+    type: null
   },
   reducers: {
-    init (state, { provider, network, uri }) {
+    init (state, { provider, type }) {
       return {
         provider,
-        network,
-        uri
+        type
       }
     }
   }

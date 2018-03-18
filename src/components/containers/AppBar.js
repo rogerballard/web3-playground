@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import AppBar from '../organisms/AppBar'
 
 const mapState = (state) => ({
-  network: state.provider.network
+  type: state.provider.type
 })
 
 export default connect(mapState)(AppBar)
