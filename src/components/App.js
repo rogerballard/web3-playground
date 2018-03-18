@@ -3,17 +3,17 @@ import { Provider } from 'react-redux'
 import 'semantic-ui-css/semantic.min.css'
 
 import store from '../utils/store'
-import EthereumProvider from './containers/EthereumProvider'
+import Web3Provider from './containers/Web3Provider'
 import Router from './Router'
 
 class App extends Component {
   render () {
     return (
-      <EthereumProvider>
+      <Web3Provider>
         <Provider store={store}>
           <Router />
         </Provider>
-      </EthereumProvider>
+      </Web3Provider>
     )
   }
 }

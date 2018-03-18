@@ -5,7 +5,7 @@ import { Container, Dropdown, Icon, Menu } from 'semantic-ui-react'
 
 class AppBar extends Component {
   render () {
-    const { type } = this.props
+    const { address } = this.props
     return (
       <Menu fixed='top'>
         <Container>
@@ -28,12 +28,9 @@ class AppBar extends Component {
             </a>
           </Menu.Item>
           <Menu.Menu position='right'>
+            <Menu.Item icon='sitemap' />
             <Menu.Item>
-              <Icon name='sitemap' />
-              {type || 'No Web3 Connection'}
-            </Menu.Item>
-            <Menu.Item>
-              Account
+              {address || 'Not Connected'}
             </Menu.Item>
           </Menu.Menu>
         </Container>
@@ -43,7 +40,7 @@ class AppBar extends Component {
 }
 
 AppBar.propTypes = {
-  type: PropTypes.string.isRequired
+  address: PropTypes.string.isRequired
 }
 
 export default AppBar

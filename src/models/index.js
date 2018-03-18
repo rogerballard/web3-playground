@@ -1,7 +1,7 @@
 import account from './account'
-import provider from './provider'
+import web3 from './web3'
 
 export {
   account,
-  provider
+  web3
 }
