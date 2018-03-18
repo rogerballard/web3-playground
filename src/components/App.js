@@ -5,6 +5,7 @@ import 'semantic-ui-css/semantic.min.css'
 import store from '../utils/store'
 import Web3Provider from './containers/Web3Provider'
 import Router from './Router'
+import '../styles/style.css'
 
 class App extends Component {
   render () {
