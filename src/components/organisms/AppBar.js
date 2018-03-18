@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { Container, Dropdown, Menu } from 'semantic-ui-react'
+import { Container, Dropdown, Icon, Menu } from 'semantic-ui-react'
 
 class AppBar extends Component {
   render () {
+    const { network } = this.props
     return (
       <Menu fixed='top'>
         <Container>
@@ -27,7 +29,8 @@ class AppBar extends Component {
           </Menu.Item>
           <Menu.Menu position='right'>
             <Menu.Item>
-              Provider
+              <Icon name='sitemap' />
+              {network || 'No Network Connection'}
             </Menu.Item>
             <Menu.Item>
               Account
@@ -37,6 +40,10 @@ class AppBar extends Component {
       </Menu>
     )
   }
+}
+
+AppBar.propTypes = {
+  network: PropTypes.string.isRequired
 }
 
 export default AppBar

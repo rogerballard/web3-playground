@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import TwoColumn from '../templates/TwoColumn'
-import AppBar from '../organisms/AppBar'
+import AppBar from '../containers/AppBar'
 
 class TokenContract extends Component {
   render () {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import OneColumn from '../templates/OneColumn'
-import AppBar from '../organisms/AppBar'
+import AppBar from '../containers/AppBar'
 
 class Home extends Component {
   render () {
