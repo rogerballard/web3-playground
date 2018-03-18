@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import { dispatch } from '@rematch/core'
 
 import getWeb3 from '../../utils/getWeb3'

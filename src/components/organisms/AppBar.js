@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { Container, Dropdown, Icon, Menu } from 'semantic-ui-react'
+import { Container, Dropdown, Menu } from 'semantic-ui-react'
 
 class AppBar extends Component {
   render () {

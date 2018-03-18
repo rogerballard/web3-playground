@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import AppBar from '../organisms/AppBar'
 
 const mapState = (state) => ({
-  address: '0x12355'
+  address: state.account.address || 'Loading...',
+  balance: state.account.balance || 'Loading...'
 })
 
 export default connect(mapState)(AppBar)
