@@ -3,10 +3,18 @@ import { Form } from 'semantic-ui-react'
 
 class TokenForm extends Component {
   render () {
-    const { onChange, onSubmit, loading, name, symbol, decimals } = this.props
+    const {
+      onChange,
+      onSubmit,
+      loading,
+      disabled,
+      name,
+      symbol,
+      decimals
+    } = this.props
 
     return (
-      <Form onSubmit={onSubmit} loading={loading}>
+      <Form onSubmit={onSubmit} loading={loading} disabled={disabled}>
         <Form.Input
           label='Name'
           name='name'

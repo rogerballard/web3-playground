@@ -3,7 +3,8 @@ const tokenForm = {
     name: 'Balrog Coin',
     symbol: 'BLRG',
     decimals: 18,
-    loading: false
+    loading: false,
+    disabled: false
   },
   reducers: {
     set (state, payload) {
@@ -18,6 +19,18 @@ const tokenForm = {
         name: '',
         symbol: '',
         decimals: 18
+      }
+    },
+    toggleLoading (state, payload) {
+      return {
+        ...state,
+        loading: !state.loading
+      }
+    },
+    toggleDisabled (state, payload) {
+      return {
+        ...state,
+        disabled: !state.disabled
       }
     }
   }

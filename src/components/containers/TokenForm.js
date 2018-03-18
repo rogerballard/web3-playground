@@ -7,7 +7,8 @@ const mapState = (state) => ({
   name: state.tokenForm.name,
   symbol: state.tokenForm.symbol,
   decimals: state.tokenForm.decimals,
-  loading: state.tokenForm.loading
+  loading: state.tokenForm.loading,
+  disabled: state.tokenForm.disabled
 })
 
 const mapDispatch = (state) => ({
