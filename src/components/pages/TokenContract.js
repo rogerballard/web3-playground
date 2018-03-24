@@ -5,7 +5,7 @@ import AppBar from '../containers/AppBar'
 import ConnectTokenForm from '../containers/ConnectTokenForm'
 import DeployTokenForm from '../containers/DeployTokenForm'
 import TokenDetail from '../containers/TokenDetail'
-import TokenInterface from '../organisms/TokenInterface'
+import TokenContractInterface from '../organisms/TokenContractInterface'
 
 class TokenContract extends Component {
   render () {
@@ -33,7 +33,7 @@ class TokenContract extends Component {
               <TokenDetail />
             </Grid.Column>
             <Grid.Column width={10}>
-              <TokenInterface />
+              <TokenContractInterface />
             </Grid.Column>
           </Grid.Row>
         </Grid>
