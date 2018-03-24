@@ -14,10 +14,7 @@ const mapState = (state) => ({
 
 const mapDispatch = (state) => ({
   onChange: (e, { name, value }) => dispatch.deployTokenForm.set({ [name]: value }),
-  onSubmit: async () => {
-    await dispatch.tokenContract.deploy()
-    await dispatch.tokenContract.initData()
-  }
+  onSubmit: async () => dispatch.tokenContract.deploy()
 })
 
 export default connect(mapState, mapDispatch)(DeployTokenForm)

@@ -45,6 +45,9 @@ const tokenContract = {
   },
   effects: {
     async deploy (payload, rootState) {
+      /**
+       * Update UI
+       */
       dispatch.deployTokenForm.toggleLoading()
       dispatch.connectTokenForm.toggleDisabled()
       /**
@@ -82,12 +85,57 @@ const tokenContract = {
         // .on('receipt', (receipt) => console.log('receipt', receipt))
         // .on('confirmation', (conf, receipt) => console.log('conf', conf, receipt))
         .then((instance) => {
+          /**
+           * Update the UI
+           */
           dispatch.deployTokenForm.toggleLoading()
           dispatch.deployTokenForm.toggleVisible()
           dispatch.connectTokenForm.toggleDisabled()
           dispatch.connectTokenForm.toggleVisible()
-          Promise.resolve(this.setInstance(instance))
+          this.setInstance(instance)
         })
+        /**
+         * Initialise the store with data from the contract
+         */
+        .then(() => this.initData())
+    },
+    async connect (payload, rootState) {
+      /**
+       * Update UI
+       */
+      dispatch.connectTokenForm.toggleLoading()
+      dispatch.deployTokenForm.toggleDisabled()
+      /**
+       * Import contract json interface
+       */
+      const compiled = require('../contracts/Token/Token.json')
+      this.setCompiled(compiled)
+      /**
+       * Fetch web3 instance from store
+       */
+      const web3 = store.getState().web3.instance
+      /**
+       * Fetch the contract address from the store
+       */
+      const contractAddress = store.getState().connectTokenForm.address
+      /**
+       * Define contract and set in store
+       */
+      const abi = store.getState().tokenContract.compiled.abi
+      const contract = new web3.eth.Contract(abi, contractAddress)
+      this.setContract(contract)
+      this.setInstance(contract)
+      /**
+       * Update the UI
+       */
+      dispatch.connectTokenForm.toggleLoading()
+      dispatch.connectTokenForm.toggleVisible()
+      dispatch.deployTokenForm.toggleDisabled()
+      dispatch.deployTokenForm.toggleVisible()
+      /**
+       * Initialise the store with data from the contract
+       */
+      await this.initData()
     },
     async initData (payload, rootState) {
       /**

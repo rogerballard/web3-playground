@@ -1,6 +1,6 @@
 const connectTokenForm = {
   state: {
-    address: '0x12345...',
+    address: null,
     loading: false,
     disabled: false,
     visible: true
