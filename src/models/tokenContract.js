@@ -3,17 +3,26 @@ import store from '../utils/store'
 const tokenContract = {
   state: {
     data: {
-      name: 'Balrog token',
-      symbol: 'BLRG',
-      decimals: 18,
-      totalSupply: 1000000,
-      owner: '0x012345...',
-      mintingFinished: false
+      name: null,
+      symbol: null,
+      decimals: null,
+      totalSupply: null,
+      owner: null,
+      mintingFinished: null
     },
     compiled: null,
     instance: null
   },
   reducers: {
+    setData (state, payload) {
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          ...payload
+        }
+      }
+    },
     setCompiled (state, payload) {
       return {
         ...state,
@@ -66,10 +75,41 @@ const tokenContract = {
       return transaction
         .send({ from: address, gas: 1500000 })
         .on('error', (error) => console.log('error', error))
-        .on('transactionHash', (txhash) => console.log('txhash', txhash))
-        .on('receipt', (receipt) => console.log('receipt', receipt))
-        .on('confirmation', (conf, receipt) => console.log('conf', conf, receipt))
-        .then((instance) => this.setInstance(instance))
+        // .on('transactionHash', (txhash) => console.log('txhash', txhash))
+        // .on('receipt', (receipt) => console.log('receipt', receipt))
+        // .on('confirmation', (conf, receipt) => console.log('conf', conf, receipt))
+        .then((instance) => Promise.resolve(this.setInstance(instance)))
+    },
+    async initData (payload, rootState) {
+      /**
+       * Fetch the contract instance
+       */
+      const instance = store.getState().tokenContract.instance
+
+      /**
+       * Call individual methods to fetch data from the contract
+       */
+      return Promise.all([
+        await instance.methods.name().call(),
+        await instance.methods.symbol().call(),
+        await instance.methods.decimals().call(),
+        await instance.methods.totalSupply().call(),
+        await instance.methods.owner().call(),
+        await instance.methods.mintingFinished().call()
+      ]).then(values => {
+        /**
+         * Update the state data so we don't have to call the contract every
+         * time
+         */
+        this.setData({
+          name: values[0],
+          symbol: values[1],
+          decimals: values[2],
+          totalSupply: values[3],
+          owner: values[4],
+          mintingFinished: values[5]
+        })
+      })
     }
   }
 }
