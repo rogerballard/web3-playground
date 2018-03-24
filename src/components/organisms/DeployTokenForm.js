@@ -10,8 +10,11 @@ class DeployTokenForm extends Component {
       disabled,
       name,
       symbol,
+      visible,
       decimals
     } = this.props
+
+    if (!visible) return null
 
     return (
       <div>

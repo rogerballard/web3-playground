@@ -8,7 +8,8 @@ const mapState = (state) => ({
   symbol: state.deployTokenForm.symbol,
   decimals: state.deployTokenForm.decimals,
   loading: state.deployTokenForm.loading,
-  disabled: state.deployTokenForm.disabled
+  disabled: state.deployTokenForm.disabled,
+  visible: state.deployTokenForm.visible
 })
 
 const mapDispatch = (state) => ({

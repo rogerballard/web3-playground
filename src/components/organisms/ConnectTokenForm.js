@@ -3,10 +3,19 @@ import { Form, Header } from 'semantic-ui-react'
 
 class ConnectTokenForm extends Component {
   render () {
-    const { onChange, onSubmit, loading, disabled, address } = this.props
+    const {
+      onChange,
+      onSubmit,
+      loading,
+      disabled,
+      visible,
+      address
+    } = this.props
+
+    if (!visible) return null
 
     return (
-      <div>
+      <div >
         <Header as='h3' icon='plug' content='Connect To Contract' />
         <p>Connect to an existing contract on the blockchain.</p>
         <Form onSubmit={onSubmit} loading={loading} disabled={disabled}>
