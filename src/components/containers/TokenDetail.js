@@ -3,12 +3,12 @@ import { connect } from 'react-redux'
 import TokenDetail from '../organisms/TokenDetail'
 
 const mapState = (state) => ({
-  name: state.tokenContract.name,
-  symbol: state.tokenContract.symbol,
-  decimals: state.tokenContract.decimals,
-  totalSupply: state.tokenContract.totalSupply,
-  owner: state.tokenContract.owner,
-  mintingFinished: state.tokenContract.mintingFinished
+  name: state.tokenContract.data.name,
+  symbol: state.tokenContract.data.symbol,
+  decimals: state.tokenContract.data.decimals,
+  totalSupply: state.tokenContract.data.totalSupply,
+  owner: state.tokenContract.data.owner,
+  mintingFinished: state.tokenContract.data.mintingFinished
 })
 
 export default connect(mapState)(TokenDetail)
