@@ -29,11 +29,18 @@ class AppBar extends Component {
               Source Code
             </a>
           </Menu.Item>
-          <Menu.Menu position='right'>
-            <Menu.Item content={balance + ' ETH'} />
-            <Menu.Item content={address} />
-            <Menu.Item content={<Blocky data={address} />} />
-          </Menu.Menu>
+          {
+            address ?
+              <Menu.Menu position='right'>
+                <Menu.Item content={balance + ' ETH'} />
+                <Menu.Item content={address} />
+                <Menu.Item content={<Blocky data={address} />} />
+              </Menu.Menu>
+              :
+              <Menu.Menu position='right'>
+                <Menu.Item content='Unlock Metamask' icon='warning' />
+              </Menu.Menu>
+          }
         </Container>
       </Menu>
     )
