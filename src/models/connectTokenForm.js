@@ -1,8 +1,6 @@
-const tokenForm = {
+const connectTokenForm = {
   state: {
-    name: 'Balrog Coin',
-    symbol: 'BLRG',
-    decimals: 18,
+    address: '0x12345...',
     loading: false,
     disabled: false
   },
@@ -11,14 +9,6 @@ const tokenForm = {
       return {
         ...state,
         ...payload
-      }
-    },
-    reset (state, payload) {
-      return {
-        ...state,
-        name: '',
-        symbol: '',
-        decimals: 18
       }
     },
     toggleLoading (state, payload) {
@@ -36,4 +26,4 @@ const tokenForm = {
   }
 }
 
-export default tokenForm
+export default connectTokenForm
