@@ -12,7 +12,13 @@ const tokenContract = {
       mintingFinished: null
     },
     compiled: null,
-    instance: null
+    instance: null,
+    methods: {
+      mint: {
+        amount: '1000',
+        recipient: '0x627306090abaB3A6e1400e9345bC60c78a8BEf57'
+      }
+    }
   },
   reducers: {
     setData (state, payload) {
@@ -40,6 +46,18 @@ const tokenContract = {
       return {
         ...state,
         instance: payload
+      }
+    },
+    setMintData (state, payload) {
+      return {
+        ...state,
+        methods: {
+          ...state.methods,
+          mint: {
+            ...state.methods.mint,
+            ...payload
+          }
+        }
       }
     }
   },
@@ -81,8 +99,8 @@ const tokenContract = {
       return transaction
         .send({ from: address, gas: 1500000 })
         .on('error', (error) => console.log('error', error))
-        // .on('transactionHash', (txhash) => console.log('txhash', txhash))
-        // .on('receipt', (receipt) => console.log('receipt', receipt))
+        // .once('transactionHash', (txhash) => console.log('txhash', txhash))
+        // .once('receipt', (receipt) => console.log('receipt', receipt))
         // .on('confirmation', (conf, receipt) => console.log('conf', conf, receipt))
         .then((instance) => {
           /**
@@ -142,7 +160,6 @@ const tokenContract = {
        * Fetch the contract instance
        */
       const instance = store.getState().tokenContract.instance
-
       /**
        * Call individual methods to fetch data from the contract
        */
@@ -167,6 +184,31 @@ const tokenContract = {
           mintingFinished: values[5]
         })
       })
+    },
+    async mint (payload, rootState) {
+      /**
+       * Fetch the form values
+       */
+      const { amount, recipient } = store.getState().tokenContract.methods.mint
+      const { address } = store.getState().account
+      /**
+       * Fetch the contract instance
+       */
+      const instance = store.getState().tokenContract.instance
+      /**
+       * Call the mint method
+       */
+      return instance.methods.mint(recipient, amount)
+        .send({ from: address })
+        .on('error', (error) => console.log('error', error))
+        // .once('transactionHash', (txhash) => console.log('txhash', txhash))
+        // .once('receipt', (receipt) => console.log('receipt', receipt))
+        // .on('confirmation', (conf, receipt) => console.log('conf', conf, receipt))
+        .then((receipt) => {
+          console.log('complete', receipt)
+        })
+        .then(() => this.initData())
+
     }
   }
 }
