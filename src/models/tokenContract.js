@@ -1,3 +1,4 @@
+import { dispatch } from '@rematch/core'
 import store from '../utils/store'
 
 const tokenContract = {
@@ -44,6 +45,8 @@ const tokenContract = {
   },
   effects: {
     async deploy (payload, rootState) {
+      dispatch.deployTokenForm.toggleLoading()
+      dispatch.connectTokenForm.toggleDisabled()
       /**
        * Import contract json interface
        */
@@ -78,7 +81,13 @@ const tokenContract = {
         // .on('transactionHash', (txhash) => console.log('txhash', txhash))
         // .on('receipt', (receipt) => console.log('receipt', receipt))
         // .on('confirmation', (conf, receipt) => console.log('conf', conf, receipt))
-        .then((instance) => Promise.resolve(this.setInstance(instance)))
+        .then((instance) => {
+          dispatch.deployTokenForm.toggleLoading()
+          dispatch.deployTokenForm.toggleVisible()
+          dispatch.connectTokenForm.toggleDisabled()
+          dispatch.connectTokenForm.toggleVisible()
+          Promise.resolve(this.setInstance(instance))
+        })
     },
     async initData (payload, rootState) {
       /**

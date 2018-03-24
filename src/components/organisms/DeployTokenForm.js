@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Header } from 'semantic-ui-react'
+import { Form, Header, Segment } from 'semantic-ui-react'
 
 class DeployTokenForm extends Component {
   render () {
@@ -17,10 +17,10 @@ class DeployTokenForm extends Component {
     if (!visible) return null
 
     return (
-      <div>
+      <Segment disabled={disabled} loading={loading}>
         <Header as='h3' icon='send' content='Deploy New Token' />
         <p>Deploy a new token contract to the blockchain.</p>
-        <Form onSubmit={onSubmit} loading={loading} disabled={disabled}>
+        <Form onSubmit={onSubmit}>
           <Form.Input
             label='Name'
             name='name'
@@ -44,7 +44,7 @@ class DeployTokenForm extends Component {
           />
           <Form.Button content='Deploy Contract' primary />
         </Form>
-      </div>
+      </Segment>
     )
   }
 }

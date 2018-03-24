@@ -35,6 +35,10 @@ const forms = [
 
 class TokenContractInterface extends Component {
   render () {
+    const { visible = false } = this.props
+
+    if (visible === false) return null
+
     return <ContractInterface forms={forms} />
   }
 }

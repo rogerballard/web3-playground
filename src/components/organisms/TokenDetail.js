@@ -9,8 +9,11 @@ class TokenDetail extends Component {
       decimals,
       totalSupply,
       owner,
-      mintingFinished
+      mintingFinished,
+      visible
     } = this.props
+
+    if (visible === false) return null
 
     return (
       <List relaxed='very'>

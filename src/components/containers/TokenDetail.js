@@ -8,7 +8,8 @@ const mapState = (state) => ({
   decimals: state.tokenContract.data.decimals,
   totalSupply: state.tokenContract.data.totalSupply,
   owner: state.tokenContract.data.owner,
-  mintingFinished: state.tokenContract.data.mintingFinished
+  mintingFinished: state.tokenContract.data.mintingFinished,
+  visible: state.tokenContract.instance !== null
 })
 
 export default connect(mapState)(TokenDetail)
