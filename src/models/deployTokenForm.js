@@ -1,7 +1,7 @@
 const deployTokenForm = {
   state: {
-    name: 'Balrog token',
-    symbol: 'BLRG',
+    name: '',
+    symbol: '',
     decimals: 18,
     loading: false,
     disabled: false,

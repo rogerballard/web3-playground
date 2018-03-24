@@ -22,7 +22,7 @@ class ConnectTokenForm extends Component {
           <Form.Input
             label='Contract Address'
             name='address'
-            placeholder='0x....'
+            placeholder='0x'
             value={address}
             onChange={onChange}
           />

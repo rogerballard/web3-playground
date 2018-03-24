@@ -41,6 +41,7 @@ class DeployTokenForm extends Component {
             placeholder='18'
             value={decimals}
             onChange={onChange}
+            type='number'
           />
           <Form.Button content='Deploy Contract' primary />
         </Form>
