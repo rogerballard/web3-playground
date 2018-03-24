@@ -4,6 +4,7 @@ import { Container, Grid } from 'semantic-ui-react'
 import AppBar from '../containers/AppBar'
 import ConnectTokenForm from '../containers/ConnectTokenForm'
 import DeployTokenForm from '../containers/DeployTokenForm'
+import TokenDetail from '../containers/TokenDetail'
 
 class TokenContract extends Component {
   render () {
@@ -24,6 +25,14 @@ class TokenContract extends Component {
             </Grid.Column>
             <Grid.Column width={8}>
               <ConnectTokenForm />
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row divided>
+            <Grid.Column width={6}>
+              <TokenDetail />
+            </Grid.Column>
+            <Grid.Column width={10}>
+              Content
             </Grid.Column>
           </Grid.Row>
         </Grid>

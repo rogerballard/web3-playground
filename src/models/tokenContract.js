@@ -1,12 +1,12 @@
-const token = {
+const tokenContract = {
   state: {
-    name: 'Balrog Coin',
+    name: 'Balrog token',
     symbol: 'BLRG',
     decimals: 18,
     totalSupply: 1000000,
-    owner: '0x012345',
+    owner: '0x012345...',
     mintingFinished: false
   }
 }
 
-export default token
+export default tokenContract
