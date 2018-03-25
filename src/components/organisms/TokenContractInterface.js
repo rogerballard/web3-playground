@@ -19,7 +19,6 @@ class TokenContractInterface extends Component {
       transfer,
       address
     } = this.props
-    console.log('transfer', transfer)
 
     const data = {
       id: 'transfer',
