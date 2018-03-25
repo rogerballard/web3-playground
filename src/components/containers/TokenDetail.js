@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import { dispatch } from '@rematch/core'
 
 import TokenDetail from '../organisms/TokenDetail'
 
@@ -9,7 +10,13 @@ const mapState = (state) => ({
   totalSupply: state.tokenContract.data.totalSupply,
   owner: state.tokenContract.data.owner,
   mintingFinished: state.tokenContract.data.mintingFinished,
-  visible: state.tokenContract.instance !== null
+  contractAddress: state.tokenContract.data.contractAddress,
+  visible: state.tokenContract.instance !== null,
+  loading: state.tokenContract.data.loading
 })
 
-export default connect(mapState)(TokenDetail)
+const mapDispatch = (state) => ({
+  fetchData: () => dispatch.tokenContract.initData()
+})
+
+export default connect(mapState, mapDispatch)(TokenDetail)

@@ -9,7 +9,9 @@ const tokenContract = {
       decimals: null,
       totalSupply: null,
       owner: null,
-      mintingFinished: null
+      mintingFinished: null,
+      contractAddress: null,
+      loading: false
     },
     compiled: null,
     instance: null,
@@ -57,6 +59,15 @@ const tokenContract = {
             ...state.methods.mint,
             ...payload
           }
+        }
+      }
+    },
+    toggleDataLoading (state, payload) {
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          loading: !state.data.loading
         }
       }
     }
@@ -156,6 +167,7 @@ const tokenContract = {
       await this.initData()
     },
     async initData (payload, rootState) {
+      this.toggleDataLoading()
       /**
        * Fetch the contract instance
        */
@@ -169,7 +181,8 @@ const tokenContract = {
         await instance.methods.decimals().call(),
         await instance.methods.totalSupply().call(),
         await instance.methods.owner().call(),
-        await instance.methods.mintingFinished().call()
+        await instance.methods.mintingFinished().call(),
+        instance.options.address
       ]).then(values => {
         /**
          * Update the state data so we don't have to call the contract every
@@ -181,8 +194,10 @@ const tokenContract = {
           decimals: values[2],
           totalSupply: values[3],
           owner: values[4],
-          mintingFinished: values[5]
+          mintingFinished: values[5],
+          contractAddress: values[6]
         })
+        this.toggleDataLoading()
       })
     },
     async mint (payload, rootState) {
@@ -204,11 +219,8 @@ const tokenContract = {
         // .once('transactionHash', (txhash) => console.log('txhash', txhash))
         // .once('receipt', (receipt) => console.log('receipt', receipt))
         // .on('confirmation', (conf, receipt) => console.log('conf', conf, receipt))
-        .then((receipt) => {
-          console.log('complete', receipt)
-        })
+        .then((receipt) => console.log('complete', receipt))
         .then(() => this.initData())
-
     }
   }
 }
