@@ -17,8 +17,8 @@ const tokenContract = {
     instance: null,
     methods: {
       mint: {
-        amount: '1000',
-        recipient: '0x627306090abaB3A6e1400e9345bC60c78a8BEf57'
+        amount: 0,
+        recipient: ''
       }
     }
   },
@@ -204,8 +204,11 @@ const tokenContract = {
       /**
        * Fetch the form values
        */
-      const { amount, recipient } = store.getState().tokenContract.methods.mint
       const { address } = store.getState().account
+      const {
+        amount,
+        recipient
+      } = store.getState().tokenContract.methods.mint
       /**
        * Fetch the contract instance
        */
@@ -213,7 +216,10 @@ const tokenContract = {
       /**
        * Call the mint method
        */
-      return instance.methods.mint(recipient, amount)
+      return instance.methods.mint(
+        recipient === '' ? address : recipient,
+        amount
+      )
         .send({ from: address })
         .on('error', (error) => console.log('error', error))
         // .once('transactionHash', (txhash) => console.log('txhash', txhash))

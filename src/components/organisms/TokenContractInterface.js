@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Segment } from 'semantic-ui-react'
+import { Button, Segment } from 'semantic-ui-react'
 
 import ContractMethodForm from './ContractMethodForm'
 
@@ -16,7 +16,12 @@ class TokenContractInterface extends Component {
     )
   }
   renderMintMethod () {
-    const { onChangeMint, onSubmitMint, amount, recipient } = this.props
+    const {
+      onChangeMint,
+      onSubmitMint,
+      address,
+      mint
+    } = this.props
 
     const data = {
       id: 'mint',
@@ -34,19 +39,20 @@ class TokenContractInterface extends Component {
           key: 'amount',
           label: 'Amount',
           name: 'amount',
-          placeholder: '1000',
+          placeholder: mint.amount,
           width: 4,
-          value: amount,
-          onChange: onChangeMint
+          value: mint.amount !== 0 ? mint.amount : '',
+          onChange: onChangeMint,
+          type: 'number'
         },
         {
           key: 'recipient',
           label: 'Recipient',
           name: 'recipient',
-          placeholder: 'Address',
+          placeholder: mint.recipient,
           width: 10,
-          value: recipient,
-          onChange: onChangeMint
+          value: mint.recipient !== address ? mint.recipient : '',
+          onChange: onChangeMint,
         }
       ],
       button: {

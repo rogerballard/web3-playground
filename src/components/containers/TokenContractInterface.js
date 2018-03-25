@@ -5,9 +5,10 @@ import TokenContractInterface from '../organisms/TokenContractInterface'
 
 const mapState = (state) => ({
   visible: state.tokenContract.instance !== null,
+  address: state.account.address,
   mint: {
-    amount: state.tokenContract.methods.mint.amount,
-    recipient: state.tokenContract.methods.mint.recipient
+    amount: state.tokenContract.methods.mint.amount || 0,
+    recipient: state.tokenContract.methods.mint.recipient || state.account.address
   }
 })
 

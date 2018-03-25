@@ -19,7 +19,7 @@ class ContractMethodForm extends Component {
         <Form.Group>
           {inputs.map(input => <Form.Input key={input.key} {...input} />)}
         </Form.Group>
-        <Form.Button {...button} />
+        <Form.Button primary {...button} />
       </Form>
     )
   }
