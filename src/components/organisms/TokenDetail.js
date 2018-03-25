@@ -12,11 +12,8 @@ class TokenDetail extends Component {
       mintingFinished,
       contractAddress,
       loading,
-      visible,
       fetchData
     } = this.props
-
-    if (visible === false) return null
 
     return (
       <div>

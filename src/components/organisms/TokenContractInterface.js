@@ -4,10 +4,6 @@ import ContractMethodForm from './ContractMethodForm'
 
 class TokenContractInterface extends Component {
   render () {
-    const { visible } = this.props
-
-    if (visible === false) return null
-
     return (
       <div>
         {this.renderBalanceOfMethod()}

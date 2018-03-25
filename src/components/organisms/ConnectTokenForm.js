@@ -8,11 +8,8 @@ class ConnectTokenForm extends Component {
       onSubmit,
       loading,
       disabled,
-      visible,
       address
     } = this.props
-
-    if (visible === false) return null
 
     return (
       <Segment disabled={disabled} loading={loading}>

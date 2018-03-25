@@ -2,8 +2,7 @@ const connectTokenForm = {
   state: {
     address: '0x8CdaF0CD259887258Bc13a92C0a6dA92698644C0',
     loading: false,
-    disabled: false,
-    visible: true
+    disabled: false
   },
   reducers: {
     set (state, payload) {
@@ -22,12 +21,6 @@ const connectTokenForm = {
       return {
         ...state,
         disabled: !state.disabled
-      }
-    },
-    toggleVisible (state, payload) {
-      return {
-        ...state,
-        visible: !state.visible
       }
     }
   }

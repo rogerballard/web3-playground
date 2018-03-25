@@ -136,9 +136,7 @@ const tokenContract = {
            * Update the UI
            */
           dispatch.deployTokenForm.toggleLoading()
-          dispatch.deployTokenForm.toggleVisible()
           dispatch.connectTokenForm.toggleDisabled()
-          dispatch.connectTokenForm.toggleVisible()
           this.setInstance(instance)
         })
         /**
@@ -176,9 +174,7 @@ const tokenContract = {
        * Update the UI
        */
       dispatch.connectTokenForm.toggleLoading()
-      dispatch.connectTokenForm.toggleVisible()
       dispatch.deployTokenForm.toggleDisabled()
-      dispatch.deployTokenForm.toggleVisible()
       /**
        * Initialise the store with data from the contract
        */

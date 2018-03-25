@@ -4,8 +4,7 @@ const deployTokenForm = {
     symbol: '',
     decimals: 18,
     loading: false,
-    disabled: false,
-    visible: true
+    disabled: false
   },
   reducers: {
     set (state, payload) {
@@ -32,12 +31,6 @@ const deployTokenForm = {
       return {
         ...state,
         disabled: !state.disabled
-      }
-    },
-    toggleVisible (state, payload) {
-      return {
-        ...state,
-        visible: !state.visible
       }
     }
   }

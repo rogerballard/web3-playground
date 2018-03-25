@@ -1,3 +1,7 @@
 body {
   background-color: #f8f8f8 !important;
 }
+.ui.active.dimmer.modals.transition {
+    display: flex !important;
+    display: -ms-flexbox !important;
+}
