@@ -25,6 +25,12 @@ const tokenContract = {
         amount: 0,
         recipient: '',
         loading: false
+      },
+      transfer: {
+        amount: 0,
+        recipient: '',
+        result: null,
+        loading: false
       }
     }
   },
@@ -75,6 +81,18 @@ const tokenContract = {
           ...state.methods,
           balanceOf: {
             ...state.methods.balanceOf,
+            ...payload
+          }
+        }
+      }
+    },
+    setTransferData (state, payload) {
+      return {
+        ...state,
+        methods: {
+          ...state.methods,
+          transfer: {
+            ...state.methods.transfer,
             ...payload
           }
         }
@@ -261,6 +279,35 @@ const tokenContract = {
         .then(() => this.setMintData({
           loading: false,
           amount: 0,
+          recipient: ''
+        }))
+    },
+    async transfer (payload, rootState) {
+      this.setTransferData({ loading: true })
+      /**
+       * Fetch the form values
+       */
+      const { address } = store.getState().account
+      const {
+        amount,
+        recipient
+      } = store.getState().tokenContract.methods.transfer
+      /**
+       * Fetch the contract instance
+       */
+      const instance = store.getState().tokenContract.instance
+      /**
+       * Call the transfer method
+       */
+      return instance.methods
+        .transfer(recipient === '' ? address : recipient, amount)
+        .send({ from: address })
+        .on('error', (error) => console.log('error', error))
+        .then((receipt) => console.log('complete', receipt))
+        .then(() => this.setTransferData({
+          loading: false,
+          amount: 0,
+          result: 'Success',
           recipient: ''
         }))
     }

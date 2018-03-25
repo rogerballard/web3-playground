@@ -6,10 +6,66 @@ class TokenContractInterface extends Component {
   render () {
     return (
       <div>
+        {this.renderTransferMethod()}
         {this.renderBalanceOfMethod()}
         {this.renderMintMethod()}
       </div>
     )
+  }
+  renderTransferMethod () {
+    const {
+      onChangeTransfer,
+      onSubmitTransfer,
+      transfer,
+      address
+    } = this.props
+    console.log('transfer', transfer)
+
+    const data = {
+      id: 'transfer',
+      onSubmit: onSubmitTransfer,
+      loading: transfer.loading,
+      visible: true,
+      header: {
+        as: 'h3',
+        content: 'Transfer',
+        subheader: 'Transfer an amount of tokens to an address.'
+      },
+      label: {
+        content: 'Send',
+        color: 'orange',
+      },
+      inputs: [
+        {
+          key: 'amount',
+          label: 'Amount',
+          name: 'amount',
+          placeholder: transfer.amount,
+          width: 4,
+          value: transfer.amount !== 0 ? transfer.amount : '',
+          onChange: onChangeTransfer,
+          type: 'number'
+        },
+        {
+          key: 'recipient',
+          label: 'Recipient',
+          name: 'recipient',
+          placeholder: address,
+          width: 10,
+          value: transfer.recipient !== address ? transfer.recipient : '',
+          onChange: onChangeTransfer
+        }
+      ],
+      button: {
+        content: 'Transfer'
+      },
+      result: {
+        hasValue: transfer.result !== null,
+        content: transfer.result,
+        icon: 'calendar'
+      }
+    }
+    return <ContractMethodForm {...data} />
   }
   renderBalanceOfMethod () {
     const {
@@ -29,10 +85,11 @@ class TokenContractInterface extends Component {
       header: {
         as: 'h3',
         content: 'Balance',
-        subheader: 'Fetch the balance of an address'
+        subheader: 'Fetch the balance of an address.'
       },
       label: {
-        content: 'Everyone'
+        content: 'Call',
+        color: 'green'
       },
       inputs: [
         {
@@ -77,7 +134,8 @@ class TokenContractInterface extends Component {
         subheader: 'Create and send an amount of tokens to the recipient.'
       },
       label: {
-        content: 'Only Owner'
+        content: 'Send',
+        color: 'orange'
       },
       inputs: [
         {

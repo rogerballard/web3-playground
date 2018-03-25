@@ -36,7 +36,6 @@ class TokenContract extends Component {
     )
   }
   render () {
-    console.log('connectedToContract', this.props.connectedToContract)
     return (
       <Container>
         <Grid>
