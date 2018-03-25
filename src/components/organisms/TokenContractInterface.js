@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Segment } from 'semantic-ui-react'
 
 import ContractMethodForm from './ContractMethodForm'
 
@@ -10,9 +9,9 @@ class TokenContractInterface extends Component {
     if (visible === false) return null
 
     return (
-      <Segment>
+      <div>
         {this.renderMintMethod()}
-      </Segment>
+      </div>
     )
   }
   renderMintMethod () {
@@ -33,6 +32,9 @@ class TokenContractInterface extends Component {
         as: 'h3',
         content: 'Mint',
         subheader: 'Create and send an amount of tokens to the recipient.'
+      },
+      label: {
+        content: 'Only Owner'
       },
       inputs: [
         {
@@ -60,7 +62,7 @@ class TokenContractInterface extends Component {
       }
     }
     return <ContractMethodForm {...data} />
-  }
+  }  
 }
 
 export default TokenContractInterface

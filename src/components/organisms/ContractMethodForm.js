@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Header } from 'semantic-ui-react'
+import { Form, Header, Label, Segment } from 'semantic-ui-react'
 
 class ContractMethodForm extends Component {
   render () {
@@ -9,18 +9,22 @@ class ContractMethodForm extends Component {
       loading,
       disabled,
       header,
+      label,
       inputs,
       button
     } = this.props
 
     return (
-      <Form key={id} onSubmit={onSubmit} loading={loading} disabled={disabled}>
+      <Segment>
         <Header {...header} />
-        <Form.Group>
-          {inputs.map(input => <Form.Input key={input.key} {...input} />)}
-        </Form.Group>
-        <Form.Button primary {...button} />
-      </Form>
+        <Label attached='top right' {...label} />
+        <Form key={id} onSubmit={onSubmit} loading={loading} disabled={disabled}>
+          <Form.Group>
+            {inputs.map(input => <Form.Input key={input.key} {...input} />)}
+          </Form.Group>
+          <Form.Button primary {...button} />
+        </Form>
+      </Segment>
     )
   }
 }
