@@ -201,6 +201,7 @@ const tokenContract = {
       })
     },
     async mint (payload, rootState) {
+      this.setMintData({ loading: true })
       /**
        * Fetch the form values
        */
@@ -227,6 +228,11 @@ const tokenContract = {
         // .on('confirmation', (conf, receipt) => console.log('conf', conf, receipt))
         .then((receipt) => console.log('complete', receipt))
         .then(() => this.initData())
+        .then(() => this.setMintData({
+          loading: false,
+          amount: 0,
+          recipient: ''
+        }))
     }
   }
 }

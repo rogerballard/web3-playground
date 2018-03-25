@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Segment } from 'semantic-ui-react'
+import { Segment } from 'semantic-ui-react'
 
 import ContractMethodForm from './ContractMethodForm'
 
@@ -26,7 +26,7 @@ class TokenContractInterface extends Component {
     const data = {
       id: 'mint',
       onSubmit: onSubmitMint,
-      loading: false,
+      loading: mint.loading,
       disabled: false,
       visible: true,
       header: {

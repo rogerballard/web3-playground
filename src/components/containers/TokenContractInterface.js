@@ -8,7 +8,8 @@ const mapState = (state) => ({
   address: state.account.address,
   mint: {
     amount: state.tokenContract.methods.mint.amount || 0,
-    recipient: state.tokenContract.methods.mint.recipient || state.account.address
+    recipient: state.tokenContract.methods.mint.recipient || state.account.address,
+    loading: state.tokenContract.methods.mint.loading
   }
 })
 
