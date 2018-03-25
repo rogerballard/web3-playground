@@ -16,9 +16,15 @@ const tokenContract = {
     compiled: null,
     instance: null,
     methods: {
+      balanceOf: {
+        address: '',
+        balance: null,
+        loading: false,
+      },
       mint: {
         amount: 0,
-        recipient: ''
+        recipient: '',
+        loading: false
       }
     }
   },
@@ -57,6 +63,18 @@ const tokenContract = {
           ...state.methods,
           mint: {
             ...state.methods.mint,
+            ...payload
+          }
+        }
+      }
+    },
+    setBalanceOfData (state, payload) {
+      return {
+        ...state,
+        methods: {
+          ...state.methods,
+          balanceOf: {
+            ...state.methods.balanceOf,
             ...payload
           }
         }
@@ -200,6 +218,24 @@ const tokenContract = {
         this.toggleDataLoading()
       })
     },
+    async balanceOf (payload, rootState) {
+      this.setBalanceOfData({ loading: true })
+      /**
+       * Fetch form values
+       */
+      const { address } = store.getState().account
+      const queryAddress = store.getState().tokenContract.methods.balanceOf.address
+      /**
+       * Fetch the contract instance
+       */
+      const instance = store.getState().tokenContract.instance
+      /**
+       * Call the balanceOf method
+       */
+      return instance.methods
+        .balanceOf(queryAddress === '' ? address : queryAddress).call()
+        .then((value) => this.setBalanceOfData({ loading: false, balance: value }))
+    },
     async mint (payload, rootState) {
       this.setMintData({ loading: true })
       /**
@@ -217,10 +253,8 @@ const tokenContract = {
       /**
        * Call the mint method
        */
-      return instance.methods.mint(
-        recipient === '' ? address : recipient,
-        amount
-      )
+      return instance.methods
+        .mint(recipient === '' ? address : recipient, amount)
         .send({ from: address })
         .on('error', (error) => console.log('error', error))
         // .once('transactionHash', (txhash) => console.log('txhash', txhash))

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Icon, Label, List, Segment } from 'semantic-ui-react'
+import { Button, Icon, List, Segment } from 'semantic-ui-react'
 
 class TokenDetail extends Component {
   render () {
@@ -46,7 +46,7 @@ class TokenDetail extends Component {
             <List.Item>
               <Icon name='certificate' />
               <List.Content>
-                <List.Header content={totalSupply} />
+                <List.Header content={totalSupply + ' ' + symbol} />
                 <List.Description content='Total supply' />
               </List.Content>
             </List.Item>

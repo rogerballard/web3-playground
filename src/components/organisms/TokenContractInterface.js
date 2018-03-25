@@ -10,9 +10,56 @@ class TokenContractInterface extends Component {
 
     return (
       <div>
+        {this.renderBalanceOfMethod()}
         {this.renderMintMethod()}
       </div>
     )
+  }
+  renderBalanceOfMethod () {
+    const {
+      onChangeBalanceOf,
+      onSubmitBalanceOf,
+      balanceOf,
+      address,
+      symbol
+    } = this.props
+
+    const data = {
+      id: 'balanceOf',
+      onSubmit: onSubmitBalanceOf,
+      loading: balanceOf.loading,
+      disabled: false,
+      visible: true,
+      header: {
+        as: 'h3',
+        content: 'Balance',
+        subheader: 'Fetch the balance of an address'
+      },
+      label: {
+        content: 'Everyone'
+      },
+      inputs: [
+        {
+          key: 'address',
+          label: 'Address',
+          name: 'address',
+          placeholder: address,
+          width: 10,
+          value: balanceOf.recipient !== address ? balanceOf.recipient : '',
+          onChange: onChangeBalanceOf
+        }
+      ],
+      button: {
+        content: 'Get Balance'
+      },
+      result: {
+        hasValue: balanceOf.balance !== null,
+        content: balanceOf.balance + ' ' + symbol,
+        icon: 'certificate'
+      }
+    }
+
+    return <ContractMethodForm {...data} />
   }
   renderMintMethod () {
     const {
@@ -51,7 +98,7 @@ class TokenContractInterface extends Component {
           key: 'recipient',
           label: 'Recipient',
           name: 'recipient',
-          placeholder: mint.recipient,
+          placeholder: address,
           width: 10,
           value: mint.recipient !== address ? mint.recipient : '',
           onChange: onChangeMint,
@@ -62,7 +109,7 @@ class TokenContractInterface extends Component {
       }
     }
     return <ContractMethodForm {...data} />
-  }  
+  }
 }
 
 export default TokenContractInterface
