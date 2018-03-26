@@ -20,9 +20,9 @@ class Instructions extends Component {
               />
             </Grid.Column>
           </Grid.Row>
-          <Grid.Row>
+          <Grid.Row stretched>
             <Grid.Column width={8}>
-              <Segment>
+              <Segment padded>
                 <Header
                   as='h2'
                   content='MetaMask'
@@ -41,7 +41,7 @@ class Instructions extends Component {
               </Segment>
             </Grid.Column>
             <Grid.Column width={8}>
-              <Segment>
+              <Segment padded>
                 <Header
                   as='h2'
                   content='Ganache'
