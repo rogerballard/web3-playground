@@ -13,7 +13,6 @@ class TokenContractInterface extends Component {
       </div>
     )
   }
-
   renderBalanceOfMethod () {
     const {
       onChangeBalanceOf,
@@ -76,7 +75,7 @@ class TokenContractInterface extends Component {
         subheader: 'End the minting process to lock the total supply of tokens.'
       },
       label: {
-        content: 'Send',
+        content: 'Transaction',
         color: 'orange'
       },
       button: {
@@ -106,7 +105,7 @@ class TokenContractInterface extends Component {
         subheader: 'Create and send an amount of tokens to the recipient.'
       },
       label: {
-        content: 'Send',
+        content: 'Transaction',
         color: 'orange'
       },
       inputs: [
@@ -155,7 +154,7 @@ class TokenContractInterface extends Component {
         subheader: 'Transfer an amount of tokens to an address.'
       },
       label: {
-        content: 'Send',
+        content: 'Transaction',
         color: 'orange',
       },
       inputs: [
