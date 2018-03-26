@@ -14,6 +14,10 @@ const tokenInterface = {
       loading: false,
       error: null
     },
+    finishMinting: {
+      error: null,
+      loading: false
+    },
     mint: {
       amount: 0,
       recipient: '',
@@ -69,6 +73,15 @@ const tokenInterface = {
         ...state,
         decimals: {
           ...state.decimals,
+          ...payload
+        }
+      }
+    },
+    setFinishMinting (state, payload) {
+      return {
+        ...state,
+        finishMinting: {
+          ...state.finishMinting,
           ...payload
         }
       }
@@ -173,6 +186,28 @@ const tokenInterface = {
         .call()
         .then((value) => this.setDecimals({ loading: false, value }))
     },
+    async finishMinting (payload, rootState) {
+      this.setFinishMinting({ loading: true })
+      /**
+       * Fetch the contract instance
+       */
+      const { instance } = store.getState().tokenContract
+      /**
+       * Call the mint method
+       */
+      const { address } = store.getState().account
+      return instance.methods
+        .finishMinting()
+        .send({ from: address })
+        .on('error', (error) => this.setFinishMinting({
+          loading: false,
+          error
+        }))
+        .then(() => this.setFinishMinting({
+          loading: false,
+          error: null
+        }))
+    },
     async loadBasicData (payload, rootState) {
       /**
        * Initialise data from contract
@@ -204,7 +239,12 @@ const tokenInterface = {
         .mint(recipient === '' ? address : recipient, amount)
         .send({ from: address })
         .on('error', (error) => this.setMint({ loading: false, error }))
-        .then(() => this.setMint({ loading: false, amount: 0, recipient: '' }))
+        .then(() => this.setMint({
+          loading: false,
+          amount: 0,
+          recipient: '',
+          error: null
+        }))
     },
     async mintingFinished (payload, rootState) {
       this.setMintingFinished({ loading: true })
@@ -297,7 +337,8 @@ const tokenInterface = {
         .then(() => this.setTransfer({
           loading: false,
           amount: 0,
-          recipient: ''
+          recipient: '',
+          error: null
         }))
     }
   },

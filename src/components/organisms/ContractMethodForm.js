@@ -7,10 +7,10 @@ class ContractMethodForm extends Component {
       id,
       onSubmit,
       loading,
-      disabled,
+      disabled = false,
       header,
       label,
-      inputs,
+      inputs = [],
       button,
       result
     } = this.props
@@ -20,12 +20,14 @@ class ContractMethodForm extends Component {
         <Header {...header} />
         <Form key={id} onSubmit={onSubmit} loading={loading} disabled={disabled}>
           <Form.Group>
-            {inputs.map(input => <Form.Input key={input.key} {...input} />)}
+            {inputs.map(input => (
+              <Form.Input key={input.key} {...input} disabled={disabled} />
+            ))}
           </Form.Group>
           <Grid verticalAlign='middle'>
             <Grid.Row>
               <Grid.Column width={4}>
-                <Form.Button primary {...button} />
+                <Form.Button primary {...button} disabled={disabled} />
               </Grid.Column>
               <Grid.Column width={12}>
                 {result && result.hasValue === true

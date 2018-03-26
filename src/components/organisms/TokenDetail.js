@@ -48,7 +48,7 @@ class TokenDetail extends Component {
               </List.Content>
             </List.Item>
             <List.Item>
-              <Icon name='unlock' />
+              <Icon name={mintingFinished ? 'lock' : 'unlock'} />
               <List.Content>
                 <List.Header content={'Minting ' +
                   (mintingFinished ? 'finished' : 'in progress')}
