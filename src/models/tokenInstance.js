@@ -1,10 +1,11 @@
+import { dispatch } from '@rematch/core'
 import store from '../utils/store'
 
 const tokenInstance = {
   state: {
-    instance: null,
-    initialised: false,
     error: null,
+    initialised: false,
+    instance: null,
     loading: false
   },
   reducers: {
@@ -54,6 +55,10 @@ const tokenInstance = {
        * Update state
        */
       this.setInstance(instance)
+      /**
+       * Call initialise method in tokenInterface
+       */
+      await dispatch.tokenInterface.loadBasicData()
     },
     async deploy (payload, rootState) {
       this.toggleLoading()
@@ -89,6 +94,7 @@ const tokenInstance = {
          */
         .on('error', (error) => this.setError(error))
         .then((instance) => this.setInstance(instance))
+        .then(() => dispatch.tokenInterface.loadBasicData())
     }
   }
 }

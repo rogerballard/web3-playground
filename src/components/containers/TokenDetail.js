@@ -1,22 +1,23 @@
 import { connect } from 'react-redux'
 import { dispatch } from '@rematch/core'
+import { select } from '@rematch/select'
 
+import store from '../../utils/store'
 import TokenDetail from '../organisms/TokenDetail'
 
 const mapState = (state) => ({
-  name: state.tokenContract.data.name,
-  symbol: state.tokenContract.data.symbol,
-  decimals: state.tokenContract.data.decimals,
-  totalSupply: state.tokenContract.data.totalSupply,
-  owner: state.tokenContract.data.owner,
-  mintingFinished: state.tokenContract.data.mintingFinished,
-  contractAddress: state.tokenContract.data.contractAddress,
-  visible: state.tokenContract.instance !== null,
-  loading: state.tokenContract.data.loading
+  contractAddress: state.tokenInstance.instance.options.address,
+  decimals: state.tokenInterface.decimals.value,
+  mintingFinished: state.tokenInterface.mintingFinished.value,
+  name: state.tokenInterface.name.value,
+  owner: state.tokenInterface.owner.value,
+  symbol: state.tokenInterface.symbol.value,
+  totalSupply: state.tokenInterface.totalSupply.value,
+  loading: select.tokenInterface.loadingBasicData(store.getState())
 })
 
 const mapDispatch = (state) => ({
-  fetchData: () => dispatch.tokenContract.initData()
+  fetchData: () => dispatch.tokenInterface.loadBasicData()
 })
 
 export default connect(mapState, mapDispatch)(TokenDetail)

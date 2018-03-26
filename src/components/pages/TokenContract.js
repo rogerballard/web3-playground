@@ -10,7 +10,7 @@ import TokenContractInterface from '../containers/TokenContractInterface'
 
 class TokenContract extends Component {
   renderConnectSection () {
-    if (this.props.connectedToContract) return null
+    if (this.props.initialised) return null
     return (
       <Grid.Row>
         <Grid.Column width={8}>
@@ -23,7 +23,7 @@ class TokenContract extends Component {
     )
   }
   renderInterfaceSection () {
-    if (!this.props.connectedToContract) return null
+    if (!this.props.initialised) return null
     return (
       <Grid.Row>
         <Grid.Column width={6}>
@@ -56,8 +56,7 @@ class TokenContract extends Component {
 }
 
 const mapState = (state) => ({
-  connectedToContract: state.tokenContract.instance !== null
-    && state.tokenContract.instance.options.address !== null
+  initialised: state.tokenInstance.initialised
 })
 
 export default connect(mapState)(TokenContract)

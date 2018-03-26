@@ -59,8 +59,8 @@ class TokenContractInterface extends Component {
         content: 'Transfer'
       },
       result: {
-        hasValue: transfer.result !== null,
-        content: transfer.result,
+        hasValue: transfer.value !== null,
+        content: transfer.value,
         icon: 'calendar'
       }
     }
@@ -97,7 +97,7 @@ class TokenContractInterface extends Component {
           name: 'address',
           placeholder: address,
           width: 10,
-          value: balanceOf.recipient !== address ? balanceOf.recipient : '',
+          value: balanceOf.address !== address ? balanceOf.address : '',
           onChange: onChangeBalanceOf
         }
       ],
@@ -105,8 +105,8 @@ class TokenContractInterface extends Component {
         content: 'Get Balance'
       },
       result: {
-        hasValue: balanceOf.balance !== null,
-        content: balanceOf.balance + ' ' + symbol,
+        hasValue: balanceOf.value !== null,
+        content: balanceOf.value + ' ' + symbol,
         icon: 'certificate'
       }
     }

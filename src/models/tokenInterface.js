@@ -138,10 +138,178 @@ const tokenInterface = {
     }
   },
   effects: {
-
+    async balanceOf (payload, rootState) {
+      this.setBalanceOf({ loading: true })
+      /**
+       * Fetch form values
+       */
+      const { address } = store.getState().account
+      const {
+        address: queryAddress
+      } = store.getState().tokenInterface.balanceOf
+      /**
+       * Fetch contract instance
+       */
+      const { instance } = store.getState().tokenInstance
+      /**
+       * Call the balanceOf method
+       */
+      return instance.methods
+        .balanceOf(queryAddress === '' ? address : queryAddress)
+        .call()
+        .then((value) => this.setBalanceOf({ loading: false, value }))
+    },
+    async decimals (payload, rootState) {
+      this.setDecimals({ loading: true })
+      /**
+       * Fetch contract instance
+       */
+      const { instance } = store.getState().tokenInstance
+      /**
+       * Call the decimals method
+       */
+      return instance.methods
+        .decimals()
+        .call()
+        .then((value) => this.setDecimals({ loading: false, value }))
+    },
+    async loadBasicData (payload, rootState) {
+      /**
+       * Initialise data from contract
+       */
+      return Promise.all([
+        dispatch.tokenInterface.decimals(),
+        dispatch.tokenInterface.mintingFinished(),
+        dispatch.tokenInterface.name(),
+        dispatch.tokenInterface.owner(),
+        dispatch.tokenInterface.symbol(),
+        dispatch.tokenInterface.totalSupply()
+      ])
+    },
+    async mint (payload, rootState) {
+      this.setMint({ loading: true })
+      /**
+       * Fetch form values
+       */
+      const { address } = store.getState().account
+      const { amount, recipient } = store.getState().tokenInterface.mint
+      /**
+       * Fetch the contract instance
+       */
+      const { instance } = store.getState().tokenInstance
+      /**
+       * Call the mint method
+       */
+      return instance.methods
+        .mint(recipient === '' ? address : recipient, amount)
+        .send({ from: address })
+        .on('error', (error) => this.setMint({ loading: false, error }))
+        .then(() => this.setMint({ loading: false, amount: 0, recipient: '' }))
+    },
+    async mintingFinished (payload, rootState) {
+      this.setMintingFinished({ loading: true })
+      /**
+       * Fetch contract instance
+       */
+      const { instance } = store.getState().tokenInstance
+      /**
+       * Call the mintingFinished method
+       */
+      return instance.methods
+        .mintingFinished()
+        .call()
+        .then((value) => this.setMintingFinished({ loading: false, value }))
+    },
+    async name (payload, rootState) {
+      this.setName({ loading: true })
+      /**
+       * Fetch contract instance
+       */
+      const { instance } = store.getState().tokenInstance
+      /**
+       * Call the name method
+       */
+      return instance.methods
+        .name()
+        .call()
+        .then((value) => this.setName({ loading: false, value }))
+    },
+    async owner (payload, rootState) {
+      this.setOwner({ loading: true })
+      /**
+       * Fetch contract instance
+       */
+      const { instance } = store.getState().tokenInstance
+      /**
+       * Call the owner method
+       */
+      return instance.methods
+        .owner()
+        .call()
+        .then((value) => this.setOwner({ loading: false, value }))
+    },
+    async symbol (payload, rootState) {
+      this.setSymbol({ loading: true })
+      /**
+       * Fetch contract instance
+       */
+      const { instance } = store.getState().tokenInstance
+      /**
+       * Call the symbol method
+       */
+      return instance.methods
+        .symbol()
+        .call()
+        .then((value) => this.setSymbol({ loading: false, value }))
+    },
+    async totalSupply (payload, rootState) {
+      this.setTotalSupply({ loading: true })
+      /**
+       * Fetch contract instance
+       */
+      const { instance } = store.getState().tokenInstance
+      /**
+       * Call the totalSupply method
+       */
+      return instance.methods
+        .totalSupply()
+        .call()
+        .then((value) => this.setTotalSupply({ loading: false, value }))
+    },
+    async transfer (payload, rootState) {
+      this.setTransfer({ loading: true })
+      /**
+       * Fetch form values
+       */
+      const { address } = store.getState().account
+      const { amount, recipient } = store.getState().tokenInterface.transfer
+      /**
+       * Fetch the contract instance
+       */
+      const { instance } = store.getState().tokenInstance
+      /**
+       * Call the mint method
+       */
+      return instance.methods
+        .transfer(recipient === '' ? address : recipient, amount)
+        .send({ from: address })
+        .on('error', (error) => this.setTransfer({ loading: false, error }))
+        .then(() => this.setTransfer({
+          loading: false,
+          amount: 0,
+          recipient: ''
+        }))
+    }
   },
-  subscriptions: {
-
+  selectors: {
+    loadingBasicData (state) {
+      return state.decimals.loading
+        || state.mintingFinished.loading
+        || state.name.loading
+        || state.owner.loading
+        || state.symbol.loading
+        || state.totalSupply.loading
+    }
   }
 }
 
