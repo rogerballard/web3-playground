@@ -150,7 +150,7 @@ const tokenInterface = {
       /**
        * Fetch contract instance
        */
-      const { instance } = store.getState().tokenInstance
+      const { instance } = store.getState().tokenContract
       /**
        * Call the balanceOf method
        */
@@ -164,7 +164,7 @@ const tokenInterface = {
       /**
        * Fetch contract instance
        */
-      const { instance } = store.getState().tokenInstance
+      const { instance } = store.getState().tokenContract
       /**
        * Call the decimals method
        */
@@ -196,7 +196,7 @@ const tokenInterface = {
       /**
        * Fetch the contract instance
        */
-      const { instance } = store.getState().tokenInstance
+      const { instance } = store.getState().tokenContract
       /**
        * Call the mint method
        */
@@ -211,7 +211,7 @@ const tokenInterface = {
       /**
        * Fetch contract instance
        */
-      const { instance } = store.getState().tokenInstance
+      const { instance } = store.getState().tokenContract
       /**
        * Call the mintingFinished method
        */
@@ -225,7 +225,7 @@ const tokenInterface = {
       /**
        * Fetch contract instance
        */
-      const { instance } = store.getState().tokenInstance
+      const { instance } = store.getState().tokenContract
       /**
        * Call the name method
        */
@@ -239,7 +239,7 @@ const tokenInterface = {
       /**
        * Fetch contract instance
        */
-      const { instance } = store.getState().tokenInstance
+      const { instance } = store.getState().tokenContract
       /**
        * Call the owner method
        */
@@ -253,7 +253,7 @@ const tokenInterface = {
       /**
        * Fetch contract instance
        */
-      const { instance } = store.getState().tokenInstance
+      const { instance } = store.getState().tokenContract
       /**
        * Call the symbol method
        */
@@ -267,7 +267,7 @@ const tokenInterface = {
       /**
        * Fetch contract instance
        */
-      const { instance } = store.getState().tokenInstance
+      const { instance } = store.getState().tokenContract
       /**
        * Call the totalSupply method
        */
@@ -286,7 +286,7 @@ const tokenInterface = {
       /**
        * Fetch the contract instance
        */
-      const { instance } = store.getState().tokenInstance
+      const { instance } = store.getState().tokenContract
       /**
        * Call the mint method
        */

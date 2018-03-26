@@ -11,8 +11,7 @@ const mapState = (state) => ({
 
 const mapDispatch = (state) => ({
   onChange: (e, { name, value }) => dispatch.connectTokenForm.set({ [name]: value }),
-  // onSubmit: async () => dispatch.tokenContract.connect()
-  onSubmit: async () => dispatch.tokenInstance.connect()
+  onSubmit: async () => dispatch.tokenContract.connect()
 })
 
 export default connect(mapState, mapDispatch)(ConnectTokenForm)

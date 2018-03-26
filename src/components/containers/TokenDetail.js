@@ -6,7 +6,7 @@ import store from '../../utils/store'
 import TokenDetail from '../organisms/TokenDetail'
 
 const mapState = (state) => ({
-  contractAddress: state.tokenInstance.instance.options.address,
+  contractAddress: state.tokenContract.instance.options.address,
   decimals: state.tokenInterface.decimals.value,
   mintingFinished: state.tokenInterface.mintingFinished.value,
   name: state.tokenInterface.name.value,

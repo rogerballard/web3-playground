@@ -56,7 +56,7 @@ class TokenContract extends Component {
 }
 
 const mapState = (state) => ({
-  initialised: state.tokenInstance.initialised
+  initialised: state.tokenContract.initialised
 })
 
 export default connect(mapState)(TokenContract)
