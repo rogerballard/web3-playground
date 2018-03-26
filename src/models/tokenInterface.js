@@ -207,6 +207,7 @@ const tokenInterface = {
           loading: false,
           error: null
         }))
+        .then(() => dispatch.tokenInterface.mintingFinished())
     },
     async loadBasicData (payload, rootState) {
       /**
@@ -245,6 +246,7 @@ const tokenInterface = {
           recipient: '',
           error: null
         }))
+        .then(() => dispatch.tokenInterface.totalSupply())
     },
     async mintingFinished (payload, rootState) {
       this.setMintingFinished({ loading: true })
