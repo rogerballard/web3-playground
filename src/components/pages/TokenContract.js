@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Container, Grid } from 'semantic-ui-react'
+import { Container, Grid, Header } from 'semantic-ui-react'
 
 import AppBar from '../containers/AppBar'
 import DeployTokenForm from '../containers/DeployTokenForm'
@@ -44,7 +44,10 @@ class TokenContract extends Component {
           </Grid.Row>
           <Grid.Row style={{ marginTop: '4em' }}>
             <Grid.Column width={16}>
-              <h1>Token Contract</h1>
+              <Header
+                as='h1'
+                content='Token Contract'
+              />
             </Grid.Column>
           </Grid.Row>
           {this.renderConnectSection()}

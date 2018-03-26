@@ -15,7 +15,7 @@ class AppBar extends Component {
             <Link to='/'>Web3 Playground</Link>
           </Menu.Item>
           <Menu.Item>
-            About
+            <Link to='/instructions'>Instructions</Link>
           </Menu.Item>
           <Dropdown item text='Contracts'>
             <Dropdown.Menu>
