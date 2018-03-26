@@ -73,7 +73,7 @@ class TokenContractInterface extends Component {
       header: {
         as: 'h3',
         content: 'Finish Minting',
-        subheader: 'End the minting process to lock the total supply of tokens'
+        subheader: 'End the minting process to lock the total supply of tokens.'
       },
       label: {
         content: 'Send',
