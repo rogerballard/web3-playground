@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Divider, Header } from 'semantic-ui-react'
 
 import ContractMethodForm from './ContractMethodForm'
 
@@ -6,11 +7,32 @@ class TokenContractInterface extends Component {
   render () {
     return (
       <div>
+        <Header
+          as='h3'
+          block
+          content='Basic Methods'
+          subheader='Everyone can use'
+        />
         {this.renderBalanceOfMethod()}
-        {this.renderFinishMintingMethod()}
-        {this.renderMintMethod()}
         {this.renderTransferMethod()}
+        <Divider />
+        <Header
+          as='h3'
+          block
+          content='Owner Methods'
+          subheader='Restricted to only the owner of the contract'
+        />
+        {this.renderMintMethod()}
+        {this.renderFinishMintingMethod()}
         {this.renderTransferOwnershipMethod()}
+        <Divider />
+        <Header
+          as='h3'
+          block
+          content='Advanced Methods'
+          subheader='More advanced methods for access delegation'
+        />
+
       </div>
     )
   }
@@ -30,7 +52,6 @@ class TokenContractInterface extends Component {
       disabled: false,
       visible: true,
       header: {
-        as: 'h3',
         content: 'Balance',
         subheader: 'Fetch the balance of an address.'
       },
@@ -77,7 +98,6 @@ class TokenContractInterface extends Component {
       disabled: mintingFinished.value || owner.value !== address,
       visible: true,
       header: {
-        as: 'h3',
         content: 'Finish Minting',
         subheader: 'End the minting process to lock the total supply of tokens.'
       },
@@ -111,7 +131,6 @@ class TokenContractInterface extends Component {
       disabled: mintingFinished.value || owner.value !== address,
       visible: true,
       header: {
-        as: 'h3',
         content: 'Mint',
         subheader: 'Create and send an amount of tokens to the recipient.'
       },
@@ -163,7 +182,6 @@ class TokenContractInterface extends Component {
       loading: transfer.loading,
       visible: true,
       header: {
-        as: 'h3',
         content: 'Transfer',
         subheader: 'Transfer an amount of tokens to an address.'
       },
@@ -219,7 +237,6 @@ class TokenContractInterface extends Component {
       disabled: owner.value !== address,
       visible: true,
       header: {
-        as: 'h3',
         content: 'Transfer Ownership',
         subheader: 'Transfer ownership of the contract to another address'
       },

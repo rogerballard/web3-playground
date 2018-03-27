@@ -17,7 +17,7 @@ class ContractMethodForm extends Component {
 
     return (
       <Segment>
-        <Header {...header} />
+        <Header as='h3' {...header} />
         <Form key={id} onSubmit={onSubmit} loading={loading} disabled={disabled}>
           <Form.Group>
             {inputs.map(input => (
@@ -37,13 +37,6 @@ class ContractMethodForm extends Component {
                   </Grid.Column>
                 </Grid.Row>)
               : null}
-            {/* {result && result.hasValue === true
-              ? (<Grid.Row>
-                  <Grid.Column width={12}>
-                    <Label content={result.content} size='large' />
-                  </Grid.Column>
-                </Grid.Row>)
-              : null} */}
           </Grid>
         </Form>
         <Label attached='top right' {...label} />
