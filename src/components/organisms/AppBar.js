@@ -20,7 +20,7 @@ class AppBar extends Component {
           <Dropdown item text='Contracts'>
             <Dropdown.Menu>
               <Dropdown.Item>
-                <Link to='/contracts/token'>Token</Link>
+                <Link to='/contracts/token'>Mintable ERC20 Token</Link>
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
