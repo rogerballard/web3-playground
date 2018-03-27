@@ -56,6 +56,11 @@ const tokenInterface = {
       value: null,
       loading: false,
       error: null
+    },
+    transferOwnership: {
+      recipient: '',
+      loading: false,
+      error: null
     }
   },
   reducers: {
@@ -145,6 +150,15 @@ const tokenInterface = {
         ...state,
         transfer: {
           ...state.transfer,
+          ...payload
+        }
+      }
+    },
+    setTransferOwnership (state, payload) {
+      return {
+        ...state,
+        transferOwnership: {
+          ...state.transferOwnership,
           ...payload
         }
       }
@@ -342,6 +356,34 @@ const tokenInterface = {
           recipient: '',
           error: null
         }))
+    },
+    async transferOwnership (payload, rootState) {
+      this.setTransferOwnership({ loading: true })
+      /**
+       * Fetch form value
+       */
+      const { address } = store.getState().account
+      const { recipient } = store.getState().tokenInterface.transferOwnership
+      /**
+       * Fetch the contract instance
+       */
+      const { instance } = store.getState().tokenContract
+      /**
+       * Call the transferOwnership method
+       */
+      return instance.methods
+        .transferOwnership(recipient === '' ? address : recipient)
+        .send({ from: address })
+        .on('error', (error) => this.setTransferOwnership({
+          loading: true,
+          error
+        }))
+        .then(() => this.setTransferOwnership({
+          loading: false,
+          error: null,
+          recipient: ''
+        }))
+        .then(() => dispatch.tokenInterface.owner())
     }
   },
   selectors: {

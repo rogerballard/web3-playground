@@ -10,6 +10,7 @@ class TokenContractInterface extends Component {
         {this.renderFinishMintingMethod()}
         {this.renderMintMethod()}
         {this.renderTransferMethod()}
+        {this.renderTransferOwnershipMethod()}
       </div>
     )
   }
@@ -61,13 +62,19 @@ class TokenContractInterface extends Component {
     return <ContractMethodForm {...data} />
   }
   renderFinishMintingMethod () {
-    const { onSubmitFinishMinting, finishMinting, mintingFinished } = this.props
+    const {
+      onSubmitFinishMinting,
+      finishMinting,
+      mintingFinished,
+      owner,
+      address
+    } = this.props
 
     const data = {
       id: 'finishMinting',
       onSubmit: onSubmitFinishMinting,
       loading: finishMinting.loading,
-      disabled: mintingFinished.value,
+      disabled: mintingFinished.value || owner.value !== address,
       visible: true,
       header: {
         as: 'h3',
@@ -80,6 +87,9 @@ class TokenContractInterface extends Component {
       },
       button: {
         content: 'Finish Minting'
+      },
+      result: {
+        content: 'Success'
       }
     }
     return <ContractMethodForm {...data} />
@@ -90,14 +100,15 @@ class TokenContractInterface extends Component {
       onSubmitMint,
       address,
       mint,
-      mintingFinished
+      mintingFinished,
+      owner
     } = this.props
 
     const data = {
       id: 'mint',
       onSubmit: onSubmitMint,
       loading: mint.loading,
-      disabled: mintingFinished.value,
+      disabled: mintingFinished.value || owner.value !== address,
       visible: true,
       header: {
         as: 'h3',
@@ -131,6 +142,9 @@ class TokenContractInterface extends Component {
       ],
       button: {
         content: 'Mint'
+      },
+      result: {
+        content: 'Success'
       }
     }
     return <ContractMethodForm {...data} />
@@ -185,6 +199,51 @@ class TokenContractInterface extends Component {
         hasValue: transfer.value !== null,
         content: transfer.value,
         icon: 'calendar'
+      }
+    }
+    return <ContractMethodForm {...data} />
+  }
+  renderTransferOwnershipMethod () {
+    const {
+      onChangeTransferOwnership,
+      onSubmitTransferOwnership,
+      transferOwnership,
+      address,
+      owner
+    } = this.props
+
+    const data = {
+      id: 'transferOwnership',
+      onSubmit: onSubmitTransferOwnership,
+      loading: transferOwnership.loading,
+      disabled: owner.value !== address,
+      visible: true,
+      header: {
+        as: 'h3',
+        content: 'Transfer Ownership',
+        subheader: 'Transfer ownership of the contract to another address'
+      },
+      label: {
+        content: 'Transaction',
+        color: 'orange'
+      },
+      inputs: [
+        {
+          key: 'recipient',
+          label: 'Recipient',
+          name: 'recipient',
+          placeholder: address,
+          width: 10,
+          value: transferOwnership.recipient !== address
+            ? transferOwnership.recipient : '',
+          onChange: onChangeTransferOwnership
+        }
+      ],
+      button: {
+        content: 'Transfer Ownership'
+      },
+      result: {
+        content: 'Success'
       }
     }
     return <ContractMethodForm {...data} />

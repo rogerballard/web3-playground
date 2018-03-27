@@ -26,15 +26,24 @@ class ContractMethodForm extends Component {
           </Form.Group>
           <Grid verticalAlign='middle'>
             <Grid.Row>
-              <Grid.Column width={4}>
+              <Grid.Column width={16}>
                 <Form.Button primary {...button} disabled={disabled} />
               </Grid.Column>
-              <Grid.Column width={12}>
-                {result && result.hasValue === true
-                  ? <Label content={result.content} size='large' />
-                  : null}
-              </Grid.Column>
             </Grid.Row>
+            {result && result.hasValue === true
+              ? (<Grid.Row>
+                  <Grid.Column width={12}>
+                    <Segment color='green' content={result.content} />
+                  </Grid.Column>
+                </Grid.Row>)
+              : null}
+            {/* {result && result.hasValue === true
+              ? (<Grid.Row>
+                  <Grid.Column width={12}>
+                    <Label content={result.content} size='large' />
+                  </Grid.Column>
+                </Grid.Row>)
+              : null} */}
           </Grid>
         </Form>
         <Label attached='top right' {...label} />
