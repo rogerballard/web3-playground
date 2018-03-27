@@ -10,11 +10,11 @@ import '../styles/style.css'
 class App extends Component {
   render () {
     return (
-      <Web3Provider>
-        <Provider store={store}>
+      <Provider store={store}>
+        <Web3Provider>
           <Router />
-        </Provider>
-      </Web3Provider>
+        </Web3Provider>
+      </Provider>
     )
   }
 }
