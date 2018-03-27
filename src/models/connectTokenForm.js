@@ -2,13 +2,20 @@ const connectTokenForm = {
   state: {
     address: '0x8CdaF0CD259887258Bc13a92C0a6dA92698644C0',
     loading: false,
-    disabled: false
+    disabled: false,
+    error: null
   },
   reducers: {
     set (state, payload) {
       return {
         ...state,
         ...payload
+      }
+    },
+    setError (state, payload) {
+      return {
+        ...state,
+        error: payload
       }
     },
     toggleLoading (state, payload) {

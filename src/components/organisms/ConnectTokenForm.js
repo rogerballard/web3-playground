@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Header, Segment } from 'semantic-ui-react'
+import { Form, Header, Icon, Segment } from 'semantic-ui-react'
 
 class ConnectTokenForm extends Component {
   render () {
@@ -8,7 +8,8 @@ class ConnectTokenForm extends Component {
       onSubmit,
       loading,
       disabled,
-      address
+      address,
+      error
     } = this.props
 
     return (
@@ -24,6 +25,11 @@ class ConnectTokenForm extends Component {
             onChange={onChange}
           />
           <Form.Button content='Connect to Contract' primary />
+          {error !== null
+            ? (<Segment color='red'>
+                <Icon name='warning' /> {error}
+              </Segment>)
+            : null}
         </Form>
       </Segment>
     )

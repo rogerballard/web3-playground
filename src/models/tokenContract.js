@@ -48,6 +48,13 @@ const tokenContract = {
        */
       const { address } = store.getState().connectTokenForm
       /**
+       * Ensure the address is not empty
+       */
+      const code = await web3.eth.getCode(address)
+      if (code === '0x0') {
+        return dispatch.connectTokenForm.setError('No contract found at address')
+      }
+      /**
        * Initialise contract from abi and contract address
        */
       const instance = new web3.eth.Contract(abi, address)
