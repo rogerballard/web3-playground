@@ -14,6 +14,13 @@ const tokenInterface = {
       loading: false,
       error: null
     },
+    decreaseApproval: {
+      spender: '',
+      subtractedValue: 0,
+      value: null,
+      loading: false,
+      error: null
+    },
     finishMinting: {
       error: null,
       loading: false
@@ -78,6 +85,15 @@ const tokenInterface = {
         ...state,
         decimals: {
           ...state.decimals,
+          ...payload
+        }
+      }
+    },
+    setDecreaseApproval (state, payload) {
+      return {
+        ...state,
+        decreaseApproval: {
+          ...state.decreaseApproval,
           ...payload
         }
       }
@@ -199,6 +215,36 @@ const tokenInterface = {
         .decimals()
         .call()
         .then((value) => this.setDecimals({ loading: false, value }))
+    },
+    async decreaseApproval (payload, rootState) {
+      this.setDecreaseApproval({ loading: true })
+      /**
+       * Fetch form values
+       */
+      const { address } = store.getState().account
+      const {
+        spender,
+        subtractedValue
+      } = store.getState().tokenInterface.decreaseApproval
+      /**
+       * Fetch the contract instance
+       */
+      const { instance } = store.getState().tokenContract
+      /**
+       * Call the decreaseApproval method
+       */
+      return instance.methods
+        .decreaseApproval(spender === '' ? address : spender, subtractedValue)
+        .send({ from: address })
+        .on('error', (error) => this.setDecreaseApproval({
+          loading: false, error
+        }))
+        .then(() => this.setDecreaseApproval({
+          loading: false,
+          subtractedValue: 0,
+          spender: '',
+          error: null
+        }))
     },
     async finishMinting (payload, rootState) {
       this.setFinishMinting({ loading: true })

@@ -32,7 +32,7 @@ class TokenContractInterface extends Component {
           content='Advanced Methods'
           subheader='More advanced methods for access delegation'
         />
-
+        {this.renderDecreaseApprovalMethod()}
       </div>
     )
   }
@@ -80,6 +80,57 @@ class TokenContractInterface extends Component {
       }
     }
 
+    return <ContractMethodForm {...data} />
+  }
+  renderDecreaseApprovalMethod () {
+    const {
+      onChangeDecreaseApproval,
+      onSubmitDecreaseApproval,
+      address,
+      decreaseApproval
+    } = this.props
+
+    const data = {
+      id: 'decreaseApproval',
+      onSubmit: onSubmitDecreaseApproval,
+      loading: decreaseApproval.loading,
+      disabled: false,
+      visible: true,
+      header: {
+        content: 'Decrease Approval',
+        subheader: 'Reduce the amount of tokens another address can spend.'
+      },
+      label: {
+        content: 'Transaction',
+        color: 'orange'
+      },
+      inputs: [
+        {
+          key: 'subtractedValue',
+          label: 'Subtracted Value',
+          name: 'subtractedValue',
+          placeholder: decreaseApproval.subtractedValue,
+          width: 4,
+          value: decreaseApproval.subtractedValue !== 0
+            ? decreaseApproval.subtractedValue : '',
+          onChange: onChangeDecreaseApproval,
+          type: 'number'
+        },
+        {
+          key: 'spender',
+          label: 'Spender',
+          name: 'spender',
+          placeholder: address,
+          width: 10,
+          value: decreaseApproval.spender !== address
+            ? decreaseApproval.spender : address,
+          onChange: onChangeDecreaseApproval
+        }
+      ],
+      button: {
+        content: 'Decrease Approval'
+      }
+    }
     return <ContractMethodForm {...data} />
   }
   renderFinishMintingMethod () {
