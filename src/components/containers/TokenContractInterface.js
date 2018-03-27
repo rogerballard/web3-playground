@@ -15,6 +15,7 @@ const mapState = (state) => ({
   owner: state.tokenInterface.owner,
   symbol: state.tokenInterface.symbol.value,
   transfer: state.tokenInterface.transfer,
+  transferFrom: state.tokenInterface.transferFrom,
   transferOwnership: state.tokenInterface.transferOwnership
 })
 
@@ -47,6 +48,10 @@ const mapDispatch = (state) => ({
     dispatch.tokenInterface.setTransfer({ [name]: value }),
   onSubmitTransfer: async () =>
     dispatch.tokenInterface.transfer(),
+  onChangeTransferFrom: (e, { name, value }) =>
+    dispatch.tokenInterface.setTransferFrom({ [name]: value }),
+  onSubmitTransferFrom: async () =>
+    dispatch.tokenInterface.transferFrom(),
   onChangeTransferOwnership: (e, { name, value }) =>
     dispatch.tokenInterface.setTransferOwnership({ [name]: value }),
   onSubmitTransferOwnership: async () =>

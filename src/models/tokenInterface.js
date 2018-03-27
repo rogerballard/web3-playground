@@ -78,6 +78,14 @@ const tokenInterface = {
       loading: false,
       error: null
     },
+    transferFrom: {
+      from: '',
+      to: '',
+      amount: 0,
+      value: null,
+      loading: false,
+      error: null
+    },
     transferOwnership: {
       recipient: '',
       loading: false,
@@ -198,6 +206,15 @@ const tokenInterface = {
         ...state,
         transfer: {
           ...state.transfer,
+          ...payload
+        }
+      }
+    },
+    setTransferFrom (state, payload) {
+      return {
+        ...state,
+        transferFrom: {
+          ...state.transferFrom,
           ...payload
         }
       }
@@ -484,6 +501,36 @@ const tokenInterface = {
           loading: false,
           amount: 0,
           recipient: '',
+          error: null
+        }))
+    },
+    async transferFrom (payload, rootState) {
+      this.setTransferFrom({ loading: true })
+      /**
+       * Fetch form values
+       */
+      const { address } = store.getState().account
+      const { amount, to, from } = store.getState().tokenInterface.transferFrom
+      /**
+       * Fetch the contract instance
+       */
+      const { instance } = store.getState().tokenContract
+      /**
+       * Call the mint method
+       */
+      return instance.methods
+        .transferFrom(
+          from === '' ? address : from,
+          to === '' ? address : to,
+          amount
+        )
+        .send({ from: address })
+        .on('error', (error) => this.setTransferFrom({ loading: false, error }))
+        .then(() => this.setTransferFrom({
+          loading: false,
+          amount: 0,
+          from: '',
+          to: '',
           error: null
         }))
     },

@@ -33,6 +33,7 @@ class TokenContractInterface extends Component {
           subheader='More advanced methods for access delegation'
         />
         {this.renderAllowanceMethod()}
+        {this.renderTransferFromMethod()}
         {this.renderIncreaseApprovalMethod()}
         {this.renderDecreaseApprovalMethod()}
       </div>
@@ -374,6 +375,68 @@ class TokenContractInterface extends Component {
       result: {
         hasValue: transfer.value !== null,
         content: transfer.value,
+        icon: 'calendar'
+      }
+    }
+    return <ContractMethodForm {...data} />
+  }
+  renderTransferFromMethod () {
+    const {
+      onChangeTransferFrom,
+      onSubmitTransferFrom,
+      transferFrom,
+      address
+    } = this.props
+
+    const data = {
+      id: 'transferFrom',
+      onSubmit: onSubmitTransferFrom,
+      loading: transferFrom.loading,
+      visible: true,
+      header: {
+        content: 'Transfer From',
+        subheader: 'Transfer an amount of tokens from one address to another.'
+      },
+      label: {
+        content: 'Transaction',
+        color: 'orange',
+      },
+      inputs: [
+        {
+          key: 'amount',
+          label: 'Amount',
+          name: 'amount',
+          placeholder: transferFrom.amount,
+          width: 4,
+          value: transferFrom.amount !== 0 ? transferFrom.amount : '',
+          onChange: onChangeTransferFrom,
+          type: 'number'
+        },
+        {
+          key: 'from',
+          label: 'From',
+          name: 'from',
+          placeholder: address,
+          width: 10,
+          value: transferFrom.from !== address ? transferFrom.from : '',
+          onChange: onChangeTransferFrom
+        },
+        {
+          key: 'to',
+          label: 'To',
+          name: 'to',
+          placeholder: address,
+          width: 10,
+          value: transferFrom.to !== address ? transferFrom.to : '',
+          onChange: onChangeTransferFrom
+        }
+      ],
+      button: {
+        content: 'Transfer'
+      },
+      result: {
+        hasValue: transferFrom.value !== null,
+        content: transferFrom.value,
         icon: 'calendar'
       }
     }
