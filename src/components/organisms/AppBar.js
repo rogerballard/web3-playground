@@ -32,8 +32,7 @@ class AppBar extends Component {
           {
             address ?
               <Menu.Menu position='right'>
-                <Menu.Item content={balance + ' ETH'} />
-                <Menu.Item content={address} />
+                <Menu.Item content={parseFloat(balance).toFixed(3) + ' ETH'} />
                 <Menu.Item content={<Blocky data={address} />} />
               </Menu.Menu>
               :

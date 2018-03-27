@@ -18,7 +18,11 @@ class ContractMethodForm extends Component {
     return (
       <Segment>
         <Header as='h3' {...header} />
-        <Form key={id} onSubmit={onSubmit} loading={loading} disabled={disabled}>
+        <Form
+          key={id} 
+          onSubmit={onSubmit}
+          loading={loading}
+          disabled={disabled}>
           <Form.Group>
             {inputs.map(input => (
               <Form.Input key={input.key} {...input} disabled={disabled} />
