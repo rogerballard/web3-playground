@@ -8,6 +8,7 @@ const mapState = (state) => ({
   balanceOf: state.tokenInterface.balanceOf,
   decreaseApproval: state.tokenInterface.decreaseApproval,
   finishMinting: state.tokenInterface.finishMinting,
+  increaseApproval: state.tokenInterface.increaseApproval,
   mint: state.tokenInterface.mint,
   mintingFinished: state.tokenInterface.mintingFinished,
   owner: state.tokenInterface.owner,
@@ -19,20 +20,28 @@ const mapState = (state) => ({
 const mapDispatch = (state) => ({
   onChangeBalanceOf: (e, { name, value }) =>
     dispatch.tokenInterface.setBalanceOf({ [name]: value }),
-  onSubmitBalanceOf: async () => dispatch.tokenInterface.balanceOf(),
+  onSubmitBalanceOf: async () =>
+    dispatch.tokenInterface.balanceOf(),
   onChangeDecreaseApproval: (e, { name, value }) =>
     dispatch.tokenInterface.setDecreaseApproval({ [name]: value }),
   onSubmitDecreaseApproval: async () =>
     dispatch.tokenInterface.decreaseApproval(),
   onChangeFinishMinting: (e, { name, value }) =>
     dispatch.tokenInterface.setFinishMinting({ [name]: value }),
-  onSubmitFinishMinting: async () => dispatch.tokenInterface.finishMinting(),
+  onSubmitFinishMinting: async () =>
+    dispatch.tokenInterface.finishMinting(),
+  onChangeIncreaseApproval: (e, { name, value }) =>
+    dispatch.tokenInterface.setIncreaseApproval({ [name]: value }),
+  onSubmitIncreaseApproval: async () =>
+    dispatch.tokenInterface.increaseApproval(),
   onChangeMint: (e, { name, value }) =>
     dispatch.tokenInterface.setMint({ [name]: value }),
-  onSubmitMint: async () => dispatch.tokenInterface.mint(),
+  onSubmitMint: async () =>
+    dispatch.tokenInterface.mint(),
   onChangeTransfer: (e, { name, value }) =>
     dispatch.tokenInterface.setTransfer({ [name]: value }),
-  onSubmitTransfer: async () => dispatch.tokenInterface.transfer(),
+  onSubmitTransfer: async () =>
+    dispatch.tokenInterface.transfer(),
   onChangeTransferOwnership: (e, { name, value }) =>
     dispatch.tokenInterface.setTransferOwnership({ [name]: value }),
   onSubmitTransferOwnership: async () =>

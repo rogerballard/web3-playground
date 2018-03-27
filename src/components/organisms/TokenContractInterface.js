@@ -32,6 +32,7 @@ class TokenContractInterface extends Component {
           content='Advanced Methods'
           subheader='More advanced methods for access delegation'
         />
+        {this.renderIncreaseApprovalMethod()}
         {this.renderDecreaseApprovalMethod()}
       </div>
     )
@@ -98,7 +99,7 @@ class TokenContractInterface extends Component {
       visible: true,
       header: {
         content: 'Decrease Approval',
-        subheader: 'Reduce the amount of tokens another address can spend.'
+        subheader: 'Decrease the amount of tokens another address can spend on your behalf.'
       },
       label: {
         content: 'Transaction',
@@ -161,6 +162,57 @@ class TokenContractInterface extends Component {
       },
       result: {
         content: 'Success'
+      }
+    }
+    return <ContractMethodForm {...data} />
+  }
+  renderIncreaseApprovalMethod () {
+    const {
+      onChangeIncreaseApproval,
+      onSubmitIncreaseApproval,
+      address,
+      increaseApproval
+    } = this.props
+
+    const data = {
+      id: 'increaseApproval',
+      onSubmit: onSubmitIncreaseApproval,
+      loading: increaseApproval.loading,
+      disabled: false,
+      visible: true,
+      header: {
+        content: 'Increase Approval',
+        subheader: 'Increase the amount of tokens another address can spend on your behalf.'
+      },
+      label: {
+        content: 'Transaction',
+        color: 'orange'
+      },
+      inputs: [
+        {
+          key: 'addedValue',
+          label: 'Added Value',
+          name: 'addedValue',
+          placeholder: increaseApproval.addedValue,
+          width: 4,
+          value: increaseApproval.addedValue !== 0
+            ? increaseApproval.addedValue : '',
+          onChange: onChangeIncreaseApproval,
+          type: 'number'
+        },
+        {
+          key: 'spender',
+          label: 'Spender',
+          name: 'spender',
+          placeholder: address,
+          width: 10,
+          value: increaseApproval.spender !== address
+            ? increaseApproval.spender : address,
+          onChange: onChangeIncreaseApproval
+        }
+      ],
+      button: {
+        content: 'Increase Approval'
       }
     }
     return <ContractMethodForm {...data} />
@@ -289,7 +341,7 @@ class TokenContractInterface extends Component {
       visible: true,
       header: {
         content: 'Transfer Ownership',
-        subheader: 'Transfer ownership of the contract to another address'
+        subheader: 'Transfer ownership of the contract to another address.'
       },
       label: {
         content: 'Transaction',

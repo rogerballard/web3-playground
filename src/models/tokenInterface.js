@@ -25,6 +25,13 @@ const tokenInterface = {
       error: null,
       loading: false
     },
+    increaseApproval: {
+      spender: '',
+      addedValue: 0,
+      value: null,
+      loading: false,
+      error: null
+    },
     mint: {
       amount: 0,
       recipient: '',
@@ -103,6 +110,15 @@ const tokenInterface = {
         ...state,
         finishMinting: {
           ...state.finishMinting,
+          ...payload
+        }
+      }
+    },
+    setIncreaseApproval (state, payload) {
+      return {
+        ...state,
+        increaseApproval: {
+          ...state.increaseApproval,
           ...payload
         }
       }
@@ -268,6 +284,36 @@ const tokenInterface = {
           error: null
         }))
         .then(() => dispatch.tokenInterface.mintingFinished())
+    },
+    async increaseApproval (payload, rootState) {
+      this.setIncreaseApproval({ loading: true })
+      /**
+       * Fetch form values
+       */
+      const { address } = store.getState().account
+      const {
+        spender,
+        addedValue
+      } = store.getState().tokenInterface.increaseApproval
+      /**
+       * Fetch the contract instance
+       */
+      const { instance } = store.getState().tokenContract
+      /**
+       * Call the increaseApproval method
+       */
+      return instance.methods
+        .decreaseApproval(spender === '' ? address : spender, addedValue)
+        .send({ from: address })
+        .on('error', (error) => this.setIncreaseApproval({
+          loading: false, error
+        }))
+        .then(() => this.setIncreaseApproval({
+          loading: false,
+          addedValue: 0,
+          spender: '',
+          error: null
+        }))
     },
     async loadBasicData (payload, rootState) {
       /**
