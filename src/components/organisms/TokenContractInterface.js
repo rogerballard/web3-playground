@@ -32,10 +32,65 @@ class TokenContractInterface extends Component {
           content='Advanced Methods'
           subheader='More advanced methods for access delegation'
         />
+        {this.renderAllowanceMethod()}
         {this.renderIncreaseApprovalMethod()}
         {this.renderDecreaseApprovalMethod()}
       </div>
     )
+  }
+  renderAllowanceMethod () {
+    const {
+      onChangeAllowance,
+      onSubmitAllowance,
+      allowance,
+      address,
+      symbol
+    } = this.props
+
+    const data = {
+      id: 'allowance',
+      onSubmit: onSubmitAllowance,
+      loading: allowance.loading,
+      disabled: false,
+      visible: true,
+      header: {
+        content: 'Allowance',
+        subheader: 'Fetch the amount of tokens that an owner allowed to a spender.'
+      },
+      label: {
+        content: 'Call',
+        color: 'green'
+      },
+      inputs: [
+        {
+          key: 'owner',
+          label: 'Owner Address',
+          name: 'owner',
+          placeholder: address,
+          width: 10,
+          value: allowance.owner !== address ? allowance.owner : '',
+          onChange: onChangeAllowance
+        },
+        {
+          key: 'spender',
+          label: 'Spender Address',
+          name: 'spender',
+          placeholder: address,
+          width: 10,
+          value: allowance.spender !== address ? allowance.spender : '',
+          onChange: onChangeAllowance
+        }
+      ],
+      button: {
+        content: 'Get Allowance'
+      },
+      result: {
+        hasValue: allowance.value !== null,
+        content: allowance.value + ' ' + symbol,
+      }
+    }
+
+    return <ContractMethodForm {...data} />
   }
   renderBalanceOfMethod () {
     const {

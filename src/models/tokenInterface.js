@@ -3,6 +3,13 @@ import store from '../utils/store'
 
 const tokenInterface = {
   state: {
+    allowance: {
+      owner: '',
+      spender: '',
+      value: null,
+      loading: false,
+      error: null
+    },
     balanceOf: {
       address: '',
       value: null,
@@ -78,6 +85,15 @@ const tokenInterface = {
     }
   },
   reducers: {
+    setAllowance (state, payload) {
+      return {
+        ...state,
+        allowance: {
+          ...state.allowance,
+          ...payload
+        }
+      }
+    },
     setBalanceOf (state, payload) {
       return {
         ...state,
@@ -197,6 +213,28 @@ const tokenInterface = {
     }
   },
   effects: {
+    async allowance (payload, rootState) {
+      this.setAllowance({ loading: true })
+      /**
+       * Fetch form values
+       */
+      const { address } = store.getState().account
+      const { owner, spender } = store.getState().tokenInterface.allowance
+      /**
+       * Fetch contract instance
+       */
+      const { instance } = store.getState().tokenContract
+      /**
+       * Call the allowance method
+       */
+      return instance.methods
+        .allowance(
+          owner === '' ? address : owner,
+          spender === '' ? address : spender
+        )
+        .call()
+        .then((value) => this.setAllowance({ loading: false, value }))
+    },
     async balanceOf (payload, rootState) {
       this.setBalanceOf({ loading: true })
       /**
