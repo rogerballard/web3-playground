@@ -62,10 +62,14 @@ class TokenContract extends Component {
           </Grid.Row>
           <Grid.Row style={{ marginTop: '4em' }}>
             <Grid.Column width={16}>
-              <Header
-                as='h1'
-                content='Token Contract'
-              />
+              <Header as='h1'>
+                <Header.Content>
+                  ERC20 Token Contract
+                </Header.Content>
+                <Header.Subheader>
+                  Deploy your own ERC20 token. Implements the <a href='https://openzeppelin.org/api/docs/token_ERC20_MintableToken.html' target='_blank'>MintableToken</a> contract by <a href='https://openzeppelin.org/' target='_blank'>OpenZeppelin</a>.
+                </Header.Subheader>
+              </Header>
             </Grid.Column>
           </Grid.Row>
           {this.renderErrorSection()}
