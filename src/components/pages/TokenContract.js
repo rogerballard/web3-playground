@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Container, Grid, Header } from 'semantic-ui-react'
+import { Container, Grid, Header, Segment } from 'semantic-ui-react'
 
 import AppBar from '../containers/AppBar'
 import DeployTokenForm from '../containers/DeployTokenForm'
@@ -9,6 +9,24 @@ import TokenDetail from '../containers/TokenDetail'
 import TokenContractInterface from '../containers/TokenContractInterface'
 
 class TokenContract extends Component {
+  renderErrorSection () {
+    if (this.props.connected) return null
+    return (
+      <Grid.Row>
+        <Grid.Column width={16}>
+          <Segment color='red'>
+            <Header
+              as='h3'
+              color='red'
+              content='Unlock MetaMask to continue'
+              subheader='This page requires a connection to an Ethereum network.'
+              icon='warning'
+            />
+          </Segment>
+        </Grid.Column>
+      </Grid.Row>
+    )
+  }
   renderConnectSection () {
     if (this.props.initialised) return null
     return (
@@ -50,6 +68,7 @@ class TokenContract extends Component {
               />
             </Grid.Column>
           </Grid.Row>
+          {this.renderErrorSection()}
           {this.renderConnectSection()}
           {this.renderInterfaceSection()}
         </Grid>
@@ -59,7 +78,8 @@ class TokenContract extends Component {
 }
 
 const mapState = (state) => ({
-  initialised: state.tokenContract.initialised
+  initialised: state.tokenContract.initialised,
+  connected: state.account.address !== null
 })
 
 export default connect(mapState)(TokenContract)

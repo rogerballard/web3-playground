@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Container, Dropdown, Menu } from 'semantic-ui-react'
+import { Container, Dropdown, Icon, Menu } from 'semantic-ui-react'
 
 import Blocky from '../atoms/Blocky'
 
@@ -26,7 +26,7 @@ class AppBar extends Component {
           </Dropdown>
           <Menu.Item>
             <a href='https://github.com/rogerballard/web3-playground'>
-              Source Code
+              <Icon name='github' size='large' />
             </a>
           </Menu.Item>
           {
@@ -38,7 +38,7 @@ class AppBar extends Component {
               </Menu.Menu>
               :
               <Menu.Menu position='right'>
-                <Menu.Item content='Unlock Metamask' icon='warning' />
+                <Menu.Item content='Unlock MetaMask' icon='warning' />
               </Menu.Menu>
           }
         </Container>

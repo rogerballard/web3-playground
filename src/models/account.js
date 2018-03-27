@@ -29,6 +29,17 @@ const account = {
        * Fetch address from provider
        */
       let address = await web3.eth.getAccounts().then(accounts => accounts[0])
+      /**
+       * Handle a locked MetaMask account
+       */
+      if (!address) {
+        dispatch.account.setAddress(null)
+        dispatch.account.setBalance('0')
+        return
+      }
+      /**
+       * If MetaMask is unlocked, put the address in the store
+       */
       dispatch.account.setAddress(address)
       /**
        * Fetch balance for address

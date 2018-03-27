@@ -6,7 +6,7 @@ import ConnectTokenForm from '../organisms/ConnectTokenForm'
 const mapState = (state) => ({
   address: state.connectTokenForm.address,
   loading: state.connectTokenForm.loading,
-  disabled: state.connectTokenForm.disabled,
+  disabled: state.connectTokenForm.disabled || state.account.address === null,
   error: state.connectTokenForm.error
 })
 
