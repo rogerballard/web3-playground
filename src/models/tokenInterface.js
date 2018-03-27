@@ -30,7 +30,7 @@ const tokenInterface = {
     },
     decreaseApproval: {
       spender: '',
-      subtractedValue: 0,
+      subtractValue: 0,
       value: null,
       loading: false,
       error: null
@@ -41,7 +41,7 @@ const tokenInterface = {
     },
     increaseApproval: {
       spender: '',
-      addedValue: 0,
+      addValue: 0,
       value: null,
       loading: false,
       error: null
@@ -336,7 +336,7 @@ const tokenInterface = {
       const { address } = store.getState().account
       const {
         spender,
-        subtractedValue
+        subtractValue
       } = store.getState().tokenInterface.decreaseApproval
       /**
        * Fetch the contract instance
@@ -346,14 +346,14 @@ const tokenInterface = {
        * Call the decreaseApproval method
        */
       return instance.methods
-        .decreaseApproval(spender === '' ? address : spender, subtractedValue)
+        .decreaseApproval(spender === '' ? address : spender, subtractValue)
         .send({ from: address })
         .on('error', (error) => this.setDecreaseApproval({
           loading: false, error
         }))
         .then(() => this.setDecreaseApproval({
           loading: false,
-          subtractedValue: 0,
+          subtractValue: 0,
           spender: '',
           error: null
         }))
@@ -389,7 +389,7 @@ const tokenInterface = {
       const { address } = store.getState().account
       const {
         spender,
-        addedValue
+        addValue
       } = store.getState().tokenInterface.increaseApproval
       /**
        * Fetch the contract instance
@@ -399,14 +399,14 @@ const tokenInterface = {
        * Call the increaseApproval method
        */
       return instance.methods
-        .decreaseApproval(spender === '' ? address : spender, addedValue)
+        .increaseApproval(spender === '' ? address : spender, addValue)
         .send({ from: address })
         .on('error', (error) => this.setIncreaseApproval({
           loading: false, error
         }))
         .then(() => this.setIncreaseApproval({
           loading: false,
-          addedValue: 0,
+          addValue: 0,
           spender: '',
           error: null
         }))

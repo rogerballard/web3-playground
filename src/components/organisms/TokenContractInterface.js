@@ -138,7 +138,7 @@ class TokenContractInterface extends Component {
         },
       ],
       button: {
-        content: 'Get Allowance'
+        content: 'Approve'
       },
       result: {
         hasValue: approve.value !== null,
@@ -217,13 +217,13 @@ class TokenContractInterface extends Component {
       },
       inputs: [
         {
-          key: 'subtractedValue',
-          label: 'Subtracted Value',
-          name: 'subtractedValue',
-          placeholder: decreaseApproval.subtractedValue,
+          key: 'subtractValue',
+          label: 'Subtract Value',
+          name: 'subtractValue',
+          placeholder: decreaseApproval.subtractValue,
           width: 4,
-          value: decreaseApproval.subtractedValue !== 0
-            ? decreaseApproval.subtractedValue : '',
+          value: decreaseApproval.subtractValue !== 0
+            ? decreaseApproval.subtractValue : '',
           onChange: onChangeDecreaseApproval,
           type: 'number'
         },
@@ -300,13 +300,13 @@ class TokenContractInterface extends Component {
       },
       inputs: [
         {
-          key: 'addedValue',
-          label: 'Added Value',
-          name: 'addedValue',
-          placeholder: increaseApproval.addedValue,
+          key: 'addValue',
+          label: 'Add Value',
+          name: 'addValue',
+          placeholder: increaseApproval.addValue,
           width: 4,
-          value: increaseApproval.addedValue !== 0
-            ? increaseApproval.addedValue : '',
+          value: increaseApproval.addValue !== 0
+            ? increaseApproval.addValue : '',
           onChange: onChangeIncreaseApproval,
           type: 'number'
         },
