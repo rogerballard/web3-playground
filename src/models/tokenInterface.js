@@ -10,6 +10,13 @@ const tokenInterface = {
       loading: false,
       error: null
     },
+    approve: {
+      spender: '',
+      amount: 0,
+      value: null,
+      loading: false,
+      error: null
+    },
     balanceOf: {
       address: '',
       value: null,
@@ -98,6 +105,15 @@ const tokenInterface = {
         ...state,
         allowance: {
           ...state.allowance,
+          ...payload
+        }
+      }
+    },
+    setApprove (state, payload) {
+      return {
+        ...state,
+        approve: {
+          ...state.approve,
           ...payload
         }
       }
@@ -251,6 +267,31 @@ const tokenInterface = {
         )
         .call()
         .then((value) => this.setAllowance({ loading: false, value }))
+    },
+    async approve (payload, rootState) {
+      this.setApprove({ loading: true })
+      /**
+       * Fetch form values
+       */
+      const { address } = store.getState().account
+      const { amount, spender } = store.getState().tokenInterface.approve
+      /**
+       * Fetch contract instance
+       */
+      const { instance } = store.getState().tokenContract
+      /**
+       * Call the allowance method
+       */
+      return instance.methods
+        .approve(spender === '' ? address : spender, amount)
+        .send({ from: address })
+        .on('error', (error) => this.setApprove({ loading: false, error }))
+        .then(() => this.setApprove({
+          loading: false,
+          error: null,
+          spender: '',
+          amount: 0
+        }))
     },
     async balanceOf (payload, rootState) {
       this.setBalanceOf({ loading: true })

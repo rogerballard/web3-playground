@@ -6,6 +6,7 @@ import TokenContractInterface from '../organisms/TokenContractInterface'
 const mapState = (state) => ({
   address: state.account.address,
   allowance: state.tokenInterface.allowance,
+  approve: state.tokenInterface.approve,
   balanceOf: state.tokenInterface.balanceOf,
   decreaseApproval: state.tokenInterface.decreaseApproval,
   finishMinting: state.tokenInterface.finishMinting,
@@ -24,6 +25,10 @@ const mapDispatch = (state) => ({
     dispatch.tokenInterface.setAllowance({ [name]: value }),
   onSubmitAllowance: async () =>
     dispatch.tokenInterface.allowance(),
+  onChangeApprove: (e, { name, value }) =>
+    dispatch.tokenInterface.setApprove({ [name]: value }),
+  onSubmitApprove: async () =>
+    dispatch.tokenInterface.approve(),
   onChangeBalanceOf: (e, { name, value }) =>
     dispatch.tokenInterface.setBalanceOf({ [name]: value }),
   onSubmitBalanceOf: async () =>

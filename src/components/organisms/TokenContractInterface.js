@@ -34,6 +34,7 @@ class TokenContractInterface extends Component {
         />
         {this.renderAllowanceMethod()}
         {this.renderTransferFromMethod()}
+        {this.renderApproveMethod()}
         {this.renderIncreaseApprovalMethod()}
         {this.renderDecreaseApprovalMethod()}
       </div>
@@ -91,6 +92,59 @@ class TokenContractInterface extends Component {
       }
     }
 
+    return <ContractMethodForm {...data} />
+  }
+  renderApproveMethod () {
+    const {
+      onChangeApprove,
+      onSubmitApprove,
+      approve,
+      address
+    } = this.props
+
+    const data = {
+      id: 'approve',
+      onSubmit: onSubmitApprove,
+      loading: approve.loading,
+      disabled: false,
+      visible: true,
+      header: {
+        content: 'Approve',
+        subheader: 'Approve the address to spend the specified amount of tokens on your behalf.'
+      },
+      label: {
+        content: 'Transaction',
+        color: 'orange'
+      },
+      inputs: [
+        {
+          key: 'amount',
+          label: 'Amount',
+          name: 'amount',
+          placeholder: approve.amount,
+          width: 4,
+          value: approve.amount !== 0 ? approve.amount : '',
+          onChange: onChangeApprove,
+          type: 'number'
+        },
+        {
+          key: 'spender',
+          label: 'Spender Address',
+          name: 'spender',
+          placeholder: address,
+          width: 10,
+          value: approve.spender !== address ? approve.spender : '',
+          onChange: onChangeApprove
+        },
+      ],
+      button: {
+        content: 'Get Allowance'
+      },
+      result: {
+        hasValue: approve.value !== null,
+        content: approve.value
+      }
+    }
     return <ContractMethodForm {...data} />
   }
   renderBalanceOfMethod () {
