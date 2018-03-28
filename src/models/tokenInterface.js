@@ -37,7 +37,8 @@ const tokenInterface = {
     },
     finishMinting: {
       error: null,
-      loading: false
+      loading: false,
+      value: null
     },
     increaseApproval: {
       spender: '',
@@ -96,7 +97,8 @@ const tokenInterface = {
     transferOwnership: {
       recipient: '',
       loading: false,
-      error: null
+      error: null,
+      value: null
     }
   },
   reducers: {
@@ -285,12 +287,17 @@ const tokenInterface = {
       return instance.methods
         .approve(spender === '' ? address : spender, amount)
         .send({ from: address })
-        .on('error', (error) => this.setApprove({ loading: false, error }))
-        .then(() => this.setApprove({
+        .on('error', (error) => this.setApprove({
+          loading: false,
+          error,
+          value: null
+        }))
+        .then((receipt) => this.setApprove({
           loading: false,
           error: null,
           spender: '',
-          amount: 0
+          amount: 0,
+          value: receipt.events.Approval.returnValues
         }))
     },
     async balanceOf (payload, rootState) {
@@ -351,11 +358,12 @@ const tokenInterface = {
         .on('error', (error) => this.setDecreaseApproval({
           loading: false, error
         }))
-        .then(() => this.setDecreaseApproval({
+        .then((receipt) => this.setDecreaseApproval({
           loading: false,
           subtractValue: 0,
           spender: '',
-          error: null
+          error: null,
+          value: receipt.events.Approval.returnValues
         }))
     },
     async finishMinting (payload, rootState) {
@@ -373,11 +381,13 @@ const tokenInterface = {
         .send({ from: address })
         .on('error', (error) => this.setFinishMinting({
           loading: false,
-          error
+          error,
+          value: null
         }))
-        .then(() => this.setFinishMinting({
+        .then((receipt) => this.setFinishMinting({
           loading: false,
-          error: null
+          error: null,
+          value: receipt.events.MintFinished !== null
         }))
         .then(() => dispatch.tokenInterface.mintingFinished())
     },
@@ -404,11 +414,12 @@ const tokenInterface = {
         .on('error', (error) => this.setIncreaseApproval({
           loading: false, error
         }))
-        .then(() => this.setIncreaseApproval({
+        .then((receipt) => this.setIncreaseApproval({
           loading: false,
           addValue: 0,
           spender: '',
-          error: null
+          error: null,
+          value: receipt.events.Approval.returnValues
         }))
     },
     async loadBasicData (payload, rootState) {
@@ -441,11 +452,16 @@ const tokenInterface = {
       return instance.methods
         .mint(recipient === '' ? address : recipient, amount)
         .send({ from: address })
-        .on('error', (error) => this.setMint({ loading: false, error }))
-        .then(() => this.setMint({
+        .on('error', (error) => this.setMint({
+          loading: false,
+          error,
+          value: null
+        }))
+        .then((receipt) => this.setMint({
           loading: false,
           amount: 0,
           recipient: '',
+          value: receipt.events.Mint.returnValues,
           error: null
         }))
         .then(() => dispatch.tokenInterface.totalSupply())
@@ -537,12 +553,17 @@ const tokenInterface = {
       return instance.methods
         .transfer(recipient === '' ? address : recipient, amount)
         .send({ from: address })
-        .on('error', (error) => this.setTransfer({ loading: false, error }))
-        .then(() => this.setTransfer({
+        .on('error', (error) => this.setTransfer({
+          loading: false,
+          error,
+          value: null
+        }))
+        .then((receipt) => this.setTransfer({
           loading: false,
           amount: 0,
           recipient: '',
-          error: null
+          error: null,
+          value: receipt.events.Transfer.returnValues
         }))
     },
     async transferFrom (payload, rootState) {
@@ -567,12 +588,13 @@ const tokenInterface = {
         )
         .send({ from: address })
         .on('error', (error) => this.setTransferFrom({ loading: false, error }))
-        .then(() => this.setTransferFrom({
+        .then((receipt) => this.setTransferFrom({
           loading: false,
           amount: 0,
           from: '',
           to: '',
-          error: null
+          error: null,
+          value: receipt.events.Transfer.returnValues
         }))
     },
     async transferOwnership (payload, rootState) {
@@ -594,12 +616,14 @@ const tokenInterface = {
         .send({ from: address })
         .on('error', (error) => this.setTransferOwnership({
           loading: true,
-          error
+          error,
+          value: null
         }))
-        .then(() => this.setTransferOwnership({
+        .then((receipt) => this.setTransferOwnership({
           loading: false,
           error: null,
-          recipient: ''
+          recipient: '',
+          value: receipt.events.OwnershipTransferred.returnValues
         }))
         .then(() => dispatch.tokenInterface.owner())
     }

@@ -88,7 +88,7 @@ class TokenContractInterface extends Component {
       },
       result: {
         hasValue: allowance.value !== null,
-        content: allowance.value + ' ' + symbol,
+        content: 'Spender can access ' + allowance.value + ' ' + symbol,
       }
     }
 
@@ -99,7 +99,8 @@ class TokenContractInterface extends Component {
       onChangeApprove,
       onSubmitApprove,
       approve,
-      address
+      address,
+      symbol
     } = this.props
 
     const data = {
@@ -142,7 +143,9 @@ class TokenContractInterface extends Component {
       },
       result: {
         hasValue: approve.value !== null,
-        content: approve.value
+        content: approve.value !== null
+          ? 'Approved ' + approve.value.value + ' ' + symbol + ' to ' + approve.value.spender
+          : null
       }
     }
     return <ContractMethodForm {...data} />
@@ -186,7 +189,7 @@ class TokenContractInterface extends Component {
       },
       result: {
         hasValue: balanceOf.value !== null,
-        content: balanceOf.value + ' ' + symbol,
+        content: 'Balance: ' + balanceOf.value + ' ' + symbol,
         icon: 'certificate'
       }
     }
@@ -198,7 +201,8 @@ class TokenContractInterface extends Component {
       onChangeDecreaseApproval,
       onSubmitDecreaseApproval,
       address,
-      decreaseApproval
+      decreaseApproval,
+      symbol
     } = this.props
 
     const data = {
@@ -240,6 +244,12 @@ class TokenContractInterface extends Component {
       ],
       button: {
         content: 'Decrease Approval'
+      },
+      result: {
+        hasValue: decreaseApproval.value !== null,
+        content: decreaseApproval.value !== null
+          ? 'Decreased allowance to ' + decreaseApproval.value.value + ' ' + symbol + ' for spender ' + decreaseApproval.value.spender
+          : null
       }
     }
     return <ContractMethodForm {...data} />
@@ -271,7 +281,8 @@ class TokenContractInterface extends Component {
         content: 'Finish Minting'
       },
       result: {
-        content: 'Success'
+        hasValue: finishMinting.value !== null,
+        content: finishMinting.value !== null ? 'Minting Finished' : null
       }
     }
     return <ContractMethodForm {...data} />
@@ -281,7 +292,8 @@ class TokenContractInterface extends Component {
       onChangeIncreaseApproval,
       onSubmitIncreaseApproval,
       address,
-      increaseApproval
+      increaseApproval,
+      symbol
     } = this.props
 
     const data = {
@@ -323,6 +335,12 @@ class TokenContractInterface extends Component {
       ],
       button: {
         content: 'Increase Approval'
+      },
+      result: {
+        hasValue: increaseApproval.value !== null,
+        content: increaseApproval.value !== null
+          ? 'Increased allowance to ' + increaseApproval.value.value + ' ' + symbol + ' for spender ' + increaseApproval.value.spender
+          : null
       }
     }
     return <ContractMethodForm {...data} />
@@ -332,6 +350,7 @@ class TokenContractInterface extends Component {
       onChangeMint,
       onSubmitMint,
       address,
+      symbol,
       mint,
       mintingFinished,
       owner
@@ -376,7 +395,10 @@ class TokenContractInterface extends Component {
         content: 'Mint'
       },
       result: {
-        content: 'Success'
+        hasValue: mint.value !== null,
+        content: mint.value !== null
+          ? mint.value.amount + ' ' + symbol + ' minted to ' + mint.value.to
+          : null
       }
     }
     return <ContractMethodForm {...data} />
@@ -386,6 +408,7 @@ class TokenContractInterface extends Component {
       onChangeTransfer,
       onSubmitTransfer,
       transfer,
+      symbol,
       address
     } = this.props
 
@@ -428,8 +451,9 @@ class TokenContractInterface extends Component {
       },
       result: {
         hasValue: transfer.value !== null,
-        content: transfer.value,
-        icon: 'calendar'
+        content: transfer.value !== null
+          ? transfer.value.value + ' ' + symbol + ' transferred to ' + transfer.value.to
+          : null
       }
     }
     return <ContractMethodForm {...data} />
@@ -439,7 +463,8 @@ class TokenContractInterface extends Component {
       onChangeTransferFrom,
       onSubmitTransferFrom,
       transferFrom,
-      address
+      address,
+      symbol
     } = this.props
 
     const data = {
@@ -490,8 +515,9 @@ class TokenContractInterface extends Component {
       },
       result: {
         hasValue: transferFrom.value !== null,
-        content: transferFrom.value,
-        icon: 'calendar'
+        content: transferFrom.value !== null
+          ? 'Transferred ' + transferFrom.value.value + ' ' + symbol + ' from ' + transferFrom.value.from + ' to ' + transferFrom.value.to
+          : null
       }
     }
     return <ContractMethodForm {...data} />
@@ -535,7 +561,10 @@ class TokenContractInterface extends Component {
         content: 'Transfer Ownership'
       },
       result: {
-        content: 'Success'
+        hasValue: transferOwnership.value !== null,
+        content: transferOwnership.value !== null
+          ? 'Ownership Transferred to ' + transferOwnership.value.newOwner
+          : null
       }
     }
     return <ContractMethodForm {...data} />

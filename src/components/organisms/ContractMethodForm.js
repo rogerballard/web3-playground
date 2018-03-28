@@ -19,7 +19,7 @@ class ContractMethodForm extends Component {
       <Segment>
         <Header as='h3' {...header} />
         <Form
-          key={id} 
+          key={id}
           onSubmit={onSubmit}
           loading={loading}
           disabled={disabled}>
@@ -36,7 +36,7 @@ class ContractMethodForm extends Component {
             </Grid.Row>
             {result && result.hasValue === true
               ? (<Grid.Row>
-                  <Grid.Column width={12}>
+                  <Grid.Column width={16}>
                     <Segment color='green' content={result.content} />
                   </Grid.Column>
                 </Grid.Row>)
