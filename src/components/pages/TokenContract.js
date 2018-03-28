@@ -67,7 +67,7 @@ class TokenContract extends Component {
                   ERC20 Token Contract
                 </Header.Content>
                 <Header.Subheader>
-                  Deploy your own ERC20 token. Implements the <a href='https://openzeppelin.org/api/docs/token_ERC20_MintableToken.html' target='_blank'>MintableToken</a> contract by <a href='https://openzeppelin.org/' target='_blank'>OpenZeppelin</a>.
+                  Deploy your own ERC20 token. Implements the <a href='https://openzeppelin.org/api/docs/token_ERC20_MintableToken.html' target='_blank'>MintableToken</a> contract by <a href='https://openzeppelin.org/' target='_blank'>OpenZeppelin</a>. Contract source available <a href='https://ethfiddle.com/eooK5U5xGt' target='_blank'>here</a>.
                 </Header.Subheader>
               </Header>
             </Grid.Column>
