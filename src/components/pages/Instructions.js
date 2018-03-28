@@ -21,8 +21,10 @@ class Instructions extends Component {
             </Grid.Column>
           </Grid.Row>
           <Grid.Row centered>
-            <Grid.Column width={12}>
-              <Image src='/img/network.jpeg' />
+            <Grid.Column width={10}>
+              <Segment padded='very'>
+                <Image src='/img/network.png' />
+              </Segment>
             </Grid.Column>
           </Grid.Row>
           <Grid.Row stretched>
