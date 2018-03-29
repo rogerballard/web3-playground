@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Header, Icon, Segment } from 'semantic-ui-react'
+import { Dropdown, Form, Grid, Header, Icon, Segment } from 'semantic-ui-react'
 
 class ConnectTokenForm extends Component {
   render () {
@@ -9,6 +9,7 @@ class ConnectTokenForm extends Component {
       loading,
       disabled,
       address,
+      deployedContracts,
       error
     } = this.props
 
@@ -17,19 +18,31 @@ class ConnectTokenForm extends Component {
         <Header as='h3' icon='plug' content='Connect To Contract' />
         <p>Connect to an existing contract on the blockchain.</p>
         <Form onSubmit={onSubmit}>
-          <Form.Input
-            label='Contract Address'
-            name='address'
-            placeholder='0x'
-            value={address}
-            onChange={onChange}
-          />
-          <Form.Button content='Connect to Contract' primary />
-          {error !== null
-            ? (<Segment color='red'>
-                <Icon name='warning' /> {error}
-              </Segment>)
-            : null}
+          <Grid>
+            <Grid.Row>
+              <Grid.Column>
+                <Dropdown
+                  placeholder='Select Contract'
+                  fluid
+                  search
+                  selection
+                  options={deployedContracts}
+                  onChange={onChange}
+                  value={address}
+                />
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column>
+                <Form.Button content='Connect to Contract' primary />
+                {error !== null
+                  ? (<Segment color='red'>
+                      <Icon name='warning' /> {error}
+                    </Segment>)
+                  : null}
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
         </Form>
       </Segment>
     )

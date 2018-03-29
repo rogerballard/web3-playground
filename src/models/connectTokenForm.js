@@ -1,6 +1,6 @@
 const connectTokenForm = {
   state: {
-    address: '0x8CdaF0CD259887258Bc13a92C0a6dA92698644C0',
+    address: '',
     loading: false,
     disabled: false,
     error: null
@@ -10,6 +10,12 @@ const connectTokenForm = {
       return {
         ...state,
         ...payload
+      }
+    },
+    setAddress (state, payload) {
+      return {
+        ...state,
+        address: payload
       }
     },
     setError (state, payload) {

@@ -100,6 +100,13 @@ const tokenContract = {
          * Update state
          */
         .on('error', (error) => this.setError(error))
+        /**
+         * Store record in persisted area of store
+         */
+        .on('receipt', (receipt) => dispatch.contracts.addToken({
+          address: receipt.contractAddress,
+          blockNumber: receipt.blockNumber
+        }))
         .then((instance) => this.setInstance(instance))
         .then(() => dispatch.tokenInterface.loadBasicData())
     }
