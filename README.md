@@ -24,6 +24,3 @@ While installing packages, take the time to download:
 __Instructions page__ has diagrams, ready for explanations to be added to be more friendly to newcomers.
 
 __ERC20 Contract page__ provides an interface for the [MintableToken](https://openzeppelin.org/api/docs/token_ERC20_MintableToken.html) smart contract by OpenZeppelin. The interface implements the full [ERC20 Specification](https://theethereum.wiki/w/index.php/ERC20_Token_Standard) as well as additional minting functionality.
-
-
-test
